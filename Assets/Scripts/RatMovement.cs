@@ -70,6 +70,13 @@ public class RatMovement : MonoBehaviour
         }
     }
 
+    void OnCollisionEnter2D(Collision2D other) {
+        if(isDashing)
+        {
+
+        }
+    }
+
     // private void OnCollisionEnter2D(Collision2D other) {
     //     if (other.tag == "Laser");
     //     {

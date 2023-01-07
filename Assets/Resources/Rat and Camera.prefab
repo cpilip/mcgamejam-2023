@@ -114,6 +114,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rat
       objectReference: {fileID: 0}
+    - target: {fileID: 4170465962229109581, guid: 84f7fa964ea20204ea2f2ab35765902c, type: 3}
+      propertyPath: m_AngularDrag
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4170465962229109583, guid: 84f7fa964ea20204ea2f2ab35765902c, type: 3}
       propertyPath: m_RootOrder
       value: 1
