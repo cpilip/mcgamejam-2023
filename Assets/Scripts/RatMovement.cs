@@ -17,16 +17,12 @@ public class RatMovement : MonoBehaviour
     private float dashCounter;
     private float dashCoolCounter;
 
-    public SpriteRenderer ratSprite;
-    public Sprite roomRat;
-    public Sprite ventRat;
-    SpriteRenderer currentSprite;
+    public bool isDashing;
 
     void Start() {
         activeMoveSpeed = moveSpeed;
         rb = this.GetComponent<Rigidbody2D>();
         rb.freezeRotation = true;
-        currentSprite = GetComponent<SpriteRenderer>();
     }
     
     // Update is called once per frame
@@ -41,10 +37,11 @@ public class RatMovement : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (dashCoolCounter <= 0 && dashCoolCounter <= 0)
+            if (dashCoolCounter <= 0 && dashCounter <= 0)
             {
                 activeMoveSpeed = dashSpeed;
                 dashCounter = dashLength;
+                isDashing = true;
             }
         }
 
@@ -52,10 +49,11 @@ public class RatMovement : MonoBehaviour
         {
             dashCounter -= Time.deltaTime;
 
-            if (dashCounter <= 0)
+            if (dashCounter <= 0) // dash is over
             {
                 activeMoveSpeed = moveSpeed;
                 dashCoolCounter = dashCooldown;
+                isDashing = false;
             }
         }
 
@@ -66,11 +64,9 @@ public class RatMovement : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D other) {
-        if (other.tag == "Vent" && currentSprite.sprite == roomRat)
+        if (other.tag == "Vent")
         {
-            
-
-            ratSprite.sprite = ventRat;
+            Debug.Log("Entered Vent");
         }
     }
 }
