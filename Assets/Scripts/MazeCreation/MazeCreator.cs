@@ -25,14 +25,19 @@ public class MazeCreator : MonoBehaviour
     //Unity-related
     [SerializeField] private GameObject rowPrefab;
     [SerializeField] private GameObject cellPrefab;
+    [SerializeField] private GameObject wireboxPrefab;
     [SerializeField] private GameObject dynamic;
     [SerializeField] private Vector3 unityRowPosition = new Vector3(0f, 0f, 0f); //Initial row's Unity position
+    [SerializeField] private Vector3 ratSpawnPosition = new Vector3(-2.4f, 0.7f, 0f); //Initial row's Unity position
     private Vector3 zero = new Vector3(0f, 0f, 0f);
     private List<GameObject> unityRows = new List<GameObject>(); //List of row GameObjects
     private List<GameObject> lasers = new List<GameObject>(); //List of laser GameObjects
 
     void Start()
     {
+        GameObject rat = GameObject.FindGameObjectsWithTag("Player")[0];
+        rat.transform.position = ratSpawnPosition;
+
         //Initialize MazeCreator
         if (instance != null && instance != this)
         {
@@ -349,11 +354,19 @@ public class MazeCreator : MonoBehaviour
         nodeIDToCellID.TryGetValue(lastNodeID, out lastCellID);
 
         Debug.Log("Longest path is from " + 0 + " " + 0 + " to " + lastCellID);
+        string[] coords = lastCellID.Split(' ');
 
+        int row = int.Parse(coords[0]);
+        int col = int.Parse(coords[1]);
+
+        Vector3 locationToSpawnWireboxAt = unityRows[row].transform.GetChild(col).position;
+
+        Instantiate(wireboxPrefab, locationToSpawnWireboxAt, Quaternion.identity);
+        wireboxPrefab.transform.GetChild(0).GetComponent<InteractableWires>().SetObjectToChange(this.gameObject);
         // TODO Spawn wire and associated functions
     }
 
-    public void DisableLasers()
+    public void ApplyWireEffect()
     {
         foreach (GameObject laser in lasers)
         {

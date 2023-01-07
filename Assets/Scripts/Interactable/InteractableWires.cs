@@ -18,4 +18,12 @@ public class InteractableWires : Interactable
         
     }
 
+    public void SetObjectToChange(GameObject obj)
+    {
+        if (obj)
+        {
+            this.objectToChange = obj;
+        }
+    }
+
 }
