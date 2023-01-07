@@ -26,6 +26,7 @@ public class MazeCreator : MonoBehaviour
     [SerializeField] private GameObject rowPrefab;
     [SerializeField] private GameObject cellPrefab;
     [SerializeField] private GameObject wireboxPrefab;
+    [SerializeField] private GameObject ventPrefab;
     [SerializeField] private GameObject dynamic;
     [SerializeField] private Vector3 unityRowPosition = new Vector3(0f, 0f, 0f); //Initial row's Unity position
     [SerializeField] private Vector3 ratSpawnPosition = new Vector3(-2.4f, 0.7f, 0f); //Initial row's Unity position
@@ -298,7 +299,7 @@ public class MazeCreator : MonoBehaviour
                             currentMazeCell.GetChild(1).gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
                         }
                     }
-                    if (!ellersMaze[row, col].HasRightWall() && row != numRows - 1)
+                    if (ellersMaze[row, col].HasRightWall() && row != numRows - 1)
                     {
                         if (rnd.Next(0, 6) == 1)
                         {
@@ -330,7 +331,7 @@ public class MazeCreator : MonoBehaviour
                     cellIDToNodeID.TryGetValue((row + 1) + " " + col, out southNodeID);
 
                     cellGraph.addEdge(thisNodeID, southNodeID);
-                    Debug.Log("S " + thisNodeID + " " + southNodeID);
+                    //Debug.Log("S " + thisNodeID + " " + southNodeID);
                 }
                 if (!ellersMaze[row, col].HasRightLaser() && !ellersMaze[row, col].HasRightWall())
                 {
@@ -338,7 +339,7 @@ public class MazeCreator : MonoBehaviour
                     cellIDToNodeID.TryGetValue(row + " " + (col + 1), out rightNodeID);
 
                     cellGraph.addEdge(thisNodeID, rightNodeID);
-                    Debug.Log("R " + thisNodeID + " " + rightNodeID);
+                    //Debug.Log("R " + thisNodeID + " " + rightNodeID);
                 }
             }
         }
@@ -358,13 +359,19 @@ public class MazeCreator : MonoBehaviour
 
         int row = int.Parse(coords[0]);
         int col = int.Parse(coords[1]);
-        Debug.Log(row + " " + col);
+
         Vector3 locationToSpawnWireboxAt = unityRows[row].transform.GetChild(col).position;
+        Vector3 locationToSpawnVentAt = unityRows[numRows - 1].transform.GetChild(numCols - 1).position;
 
         locationToSpawnWireboxAt = new Vector3(locationToSpawnWireboxAt.x - 2.6f, locationToSpawnWireboxAt.y + 0.8f, locationToSpawnWireboxAt.z);
-        Instantiate(wireboxPrefab, locationToSpawnWireboxAt, Quaternion.identity);
-        Debug.Log(locationToSpawnWireboxAt);
-        wireboxPrefab.transform.GetChild(0).GetComponent<InteractableWires>().SetObjectToChange(this.gameObject);
+        locationToSpawnVentAt = new Vector3(locationToSpawnVentAt.x - 2.6f, locationToSpawnVentAt.y + 0.8f, locationToSpawnVentAt.z);
+        
+        GameObject mazeWirebox = Instantiate(wireboxPrefab, locationToSpawnWireboxAt, Quaternion.identity);
+        GameObject mazeVent = Instantiate(ventPrefab, locationToSpawnVentAt, Quaternion.identity);
+
+        mazeWirebox.transform.GetChild(0).GetComponent<InteractableWires>().SetObjectToChange(this.gameObject);
+        mazeWirebox.transform.GetChild(0).GetComponent<DashableVent>().SetVentAsMazeVent();
+        
         // TODO Spawn wire and associated functions
     }
 
