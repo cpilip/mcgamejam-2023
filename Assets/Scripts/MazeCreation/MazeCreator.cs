@@ -358,10 +358,12 @@ public class MazeCreator : MonoBehaviour
 
         int row = int.Parse(coords[0]);
         int col = int.Parse(coords[1]);
-
+        Debug.Log(row + " " + col);
         Vector3 locationToSpawnWireboxAt = unityRows[row].transform.GetChild(col).position;
 
+        locationToSpawnWireboxAt = new Vector3(locationToSpawnWireboxAt.x - 2.6f, locationToSpawnWireboxAt.y + 0.8f, locationToSpawnWireboxAt.z);
         Instantiate(wireboxPrefab, locationToSpawnWireboxAt, Quaternion.identity);
+        Debug.Log(locationToSpawnWireboxAt);
         wireboxPrefab.transform.GetChild(0).GetComponent<InteractableWires>().SetObjectToChange(this.gameObject);
         // TODO Spawn wire and associated functions
     }
