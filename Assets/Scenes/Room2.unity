@@ -1407,6 +1407,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TestRat
       objectReference: {fileID: 0}
+    - target: {fileID: 7203445683220229982, guid: 98566cb1f83923a49a097b2c265027ec, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 98566cb1f83923a49a097b2c265027ec, type: 3}
 --- !u!1 &796216863

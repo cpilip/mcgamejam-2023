@@ -25,4 +25,9 @@ public class DashableVent : Dashable
             CurrentSceneManager.Instance.SwapToNextScene();
         }
     }
+
+    public void SetVentAsMazeVent()
+    {
+        m_thisVent = VentID.MazeVent;
+    }
 }
