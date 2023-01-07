@@ -6,6 +6,7 @@ public class MazeCreator : MonoBehaviour
 {
     //Singleton for the MazeCreator
     private static MazeCreator instance;
+
     public static MazeCreator Instance { get { return instance; } }
 
     //Maze generation and data-related
@@ -17,21 +18,27 @@ public class MazeCreator : MonoBehaviour
     private System.Random rnd = new System.Random();
 
     //Graph conversion and path calculation
-    private int[,] adjMatrix;
-    //private Hash
+    private Graph cellGraph;
+    private Dictionary<string, int> cellIDToNodeID = new Dictionary<string, int>();
+    private Dictionary<int, string> nodeIDToCellID = new Dictionary<int, string>();
 
     //Unity-related
     [SerializeField] private GameObject rowPrefab;
     [SerializeField] private GameObject cellPrefab;
+    [SerializeField] private GameObject wireboxPrefab;
+    [SerializeField] private GameObject ventPrefab;
     [SerializeField] private GameObject dynamic;
     [SerializeField] private Vector3 unityRowPosition = new Vector3(0f, 0f, 0f); //Initial row's Unity position
+    [SerializeField] private Vector3 ratSpawnPosition = new Vector3(-2.4f, 0.7f, 0f); //Initial row's Unity position
     private Vector3 zero = new Vector3(0f, 0f, 0f);
     private List<GameObject> unityRows = new List<GameObject>(); //List of row GameObjects
-
-    
+    private List<GameObject> lasers = new List<GameObject>(); //List of laser GameObjects
 
     void Start()
     {
+        GameObject rat = GameObject.FindGameObjectsWithTag("Player")[0];
+        rat.transform.position = ratSpawnPosition;
+
         //Initialize MazeCreator
         if (instance != null && instance != this)
         {
@@ -43,14 +50,20 @@ public class MazeCreator : MonoBehaviour
         }
 
         ellersMaze = new MazeCell[numRows, numCols];
-        adjMatrix = new int[numRows * numCols, numRows * numCols];
+        cellGraph = new Graph(numRows * numCols);
 
         //Initialize the maze with empty maze cells
+        int nodeID = 0;
         for (int row = 0; row < numRows; row++)
         {
             for (int col = 0; col < numCols; col++)
             {
                 ellersMaze[row, col] = new MazeCell();
+                
+                // Map cell row/col to node number
+                cellIDToNodeID.Add(row + " " + col, nodeID);
+                nodeIDToCellID.Add(nodeID, row + " " + col);
+                nodeID++;
             }
         }
 
@@ -64,7 +77,9 @@ public class MazeCreator : MonoBehaviour
         currLabel = numCols + 1;
 
         GenerateEllersMaze();
+        PlaceLasersAndWeakenWalls();
         ConvertEllersMaze();
+        CalculateWireLocation();
         //PrintEllersMaze();
     }
 
@@ -193,13 +208,16 @@ public class MazeCreator : MonoBehaviour
 
                 if (ellersMaze[currRow, i].HasRightWall() == false)
                 {
-                    Destroy(currentMazeCell.GetChild(0).gameObject); //Cannot change children in a prefab, so I can safely assume that this object is the right/east wall
+                    //Destroy(currentMazeCell.GetChild(0).gameObject); //Cannot change children in a prefab, so I can safely assume that this object is the right/east wall
+                    currentMazeCell.GetChild(0).gameObject.SetActive(false);
                 }
 
                 if (ellersMaze[currRow, i].HasSouthWall() == false)
                 {
-                    Destroy(currentMazeCell.GetChild(1).gameObject); //Destroy south wall of current maze cell
-                    Destroy(nextMazeCell.GetChild(2).gameObject); //Destroy north wall of adjacent maze cell in the next row
+                    //Destroy(currentMazeCell.GetChild(1).gameObject); //Destroy south wall of current maze cell
+                    //Destroy(nextMazeCell.GetChild(2).gameObject); //Destroy north wall of adjacent maze cell in the next row
+                    currentMazeCell.GetChild(1).gameObject.SetActive(false);
+                    nextMazeCell.GetChild(2).gameObject.SetActive(false);
                 }
             }
         }
@@ -234,25 +252,134 @@ public class MazeCreator : MonoBehaviour
 
             if (ellersMaze[numRows - 1, i].HasRightWall() == false)
             {
-                Destroy(currentMazeCell.GetChild(0).gameObject); //Destroy right/east wall
+                //Destroy(currentMazeCell.GetChild(0).gameObject); //Destroy right/east wall
+                currentMazeCell.GetChild(0).gameObject.SetActive(false);
             }
         }
     }
+    private void PlaceLasersAndWeakenWalls()
+    {
+        for (int row = 0; row < numRows; row++)
+        {
+            for (int col = 0; col < numCols; col++)
+            {
+                // A small buffer to leave the top left with no special walls
+                if (row > 3 || col > 3)
+                {
+                    Transform currentMazeCell = unityRows[row].transform.GetChild(col);
+
+                    // 25% chance to change opening into laser
+                    if (!ellersMaze[row, col].HasSouthWall())
+                    {
+                        if (rnd.Next(0, 5) == 1)
+                        {
+                            ellersMaze[row, col].PlaceSouthLaser();
+                            currentMazeCell.GetChild(1).gameObject.SetActive(true);
+                            currentMazeCell.GetChild(1).gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+                            lasers.Add(currentMazeCell.GetChild(1).gameObject);
+                        }
+                    }
+                    if (!ellersMaze[row, col].HasRightWall())
+                    {
+                        if (rnd.Next(0, 5) == 1)
+                        {
+                            ellersMaze[row, col].PlaceRightLaser();
+                            currentMazeCell.GetChild(0).gameObject.SetActive(true);
+                            currentMazeCell.GetChild(0).gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+                            lasers.Add(currentMazeCell.GetChild(0).gameObject);
+                        }
+                    }
+
+                    // 20% chance to change wall into a destructible wall
+                    if (ellersMaze[row, col].HasSouthWall() && col != numCols - 1)
+                    {
+                        if (rnd.Next(0, 6) == 1)
+                        {
+                            ellersMaze[row, col].WeakenSouthWall();
+                            currentMazeCell.GetChild(1).gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
+                        }
+                    }
+                    if (ellersMaze[row, col].HasRightWall() && row != numRows - 1)
+                    {
+                        if (rnd.Next(0, 6) == 1)
+                        {
+                            ellersMaze[row, col].WeakenRightWall();
+                            currentMazeCell.GetChild(0).gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     private void ConvertEllersMaze()
     {
         for (int row = 0; row < numRows; row++)
         {
             for (int col = 0; col < numCols; col++)
             {
-                if (ellersMaze[row, col].HasSouthWall())
+                // Loop through cell row/col, get associated node number
+                // Exploit structure of maze to link to right/south cell if there is an opening
+                // This generates a graph where the links only exist between nodes if there is an opening between cells
+                // We treat lasers like solid walls, so this graph is only the first traversable part of the maze
+                int thisNodeID;
+                cellIDToNodeID.TryGetValue(row + " " + col, out thisNodeID);
+
+                if (!ellersMaze[row, col].HasSouthLaser() && !ellersMaze[row, col].HasSouthWall())
                 {
-                    //cell += "S";
+                    int southNodeID;
+                    cellIDToNodeID.TryGetValue((row + 1) + " " + col, out southNodeID);
+
+                    cellGraph.addEdge(thisNodeID, southNodeID);
+                    //Debug.Log("S " + thisNodeID + " " + southNodeID);
                 }
-                if (ellersMaze[row, col].HasRightWall())
+                if (!ellersMaze[row, col].HasRightLaser() && !ellersMaze[row, col].HasRightWall())
                 {
-                    //cell += "R";
+                    int rightNodeID;
+                    cellIDToNodeID.TryGetValue(row + " " + (col + 1), out rightNodeID);
+
+                    cellGraph.addEdge(thisNodeID, rightNodeID);
+                    //Debug.Log("R " + thisNodeID + " " + rightNodeID);
                 }
             }
+        }
+    }
+    private void CalculateWireLocation()
+    {
+        // BFS search to get the longest possible path from the traversable part of the maze, and get the last cell of that path
+        int startNodeID;
+        cellIDToNodeID.TryGetValue(0 + " " + 0, out startNodeID);
+        int lastNodeID = cellGraph.breadthFirstSearch(startNodeID);
+
+        string lastCellID;
+        nodeIDToCellID.TryGetValue(lastNodeID, out lastCellID);
+
+        Debug.Log("Longest path is from " + 0 + " " + 0 + " to " + lastCellID);
+        string[] coords = lastCellID.Split(' ');
+
+        int row = int.Parse(coords[0]);
+        int col = int.Parse(coords[1]);
+
+        Vector3 locationToSpawnWireboxAt = unityRows[row].transform.GetChild(col).position;
+        Vector3 locationToSpawnVentAt = unityRows[numRows - 1].transform.GetChild(numCols - 1).position;
+
+        locationToSpawnWireboxAt = new Vector3(locationToSpawnWireboxAt.x - 2.6f, locationToSpawnWireboxAt.y + 0.8f, locationToSpawnWireboxAt.z);
+        locationToSpawnVentAt = new Vector3(locationToSpawnVentAt.x - 2.6f, locationToSpawnVentAt.y + 0.8f, locationToSpawnVentAt.z);
+        
+        GameObject mazeWirebox = Instantiate(wireboxPrefab, locationToSpawnWireboxAt, Quaternion.identity);
+        GameObject mazeVent = Instantiate(ventPrefab, locationToSpawnVentAt, Quaternion.identity);
+
+        mazeWirebox.transform.GetChild(0).GetComponent<InteractableWires>().SetObjectToChange(this.gameObject);
+        mazeWirebox.transform.GetChild(0).GetComponent<DashableVent>().SetVentAsMazeVent();
+        
+        // TODO Spawn wire and associated functions
+    }
+
+    public void ApplyWireEffect()
+    {
+        foreach (GameObject laser in lasers)
+        {
+            laser.SetActive(false);
         }
     }
 
@@ -280,10 +407,82 @@ public class MazeCreator : MonoBehaviour
         }
     }
 
+    private class Graph
+    {
+        private int numVertices;
+        private List<int>[] adjList;
+
+        public Graph(int vertices)
+        {
+            this.numVertices = vertices;
+            this.adjList = new List<int>[this.numVertices];
+
+            for (int i = 0; i < this.numVertices; ++i)
+            {
+                this.adjList[i] = new List<int>();
+            }
+        }
+
+        public void addEdge(int u, int v)
+        {
+            this.adjList[u].Add(v);
+            this.adjList[v].Add(u);
+        }
+
+        public int breadthFirstSearch(int u)
+        {
+            int[] dist = new int[this.numVertices];
+
+            for (int i = 0; i < this.numVertices; i++)
+            {
+                dist[i] = -1;
+            }
+
+            Queue<int> q = new Queue<int>();
+            q.Enqueue(u);
+
+            dist[u] = 0;
+            while (q.Count != 0)
+            {
+                int t = q.Dequeue();
+
+                for (int i = 0; i < this.adjList[t].Count; i++)
+                {
+                    int v = this.adjList[t][i];
+
+                    if (dist[v] == -1)
+                    {
+                        q.Enqueue(v);
+                        dist[v] = dist[t] + 1;
+                    }
+                }
+            }
+            int maxDist = 0;
+            int lastCell = 0;
+
+            // get farthest node distance and its index
+            for (int i = 0; i < this.numVertices; ++i)
+            {
+                if (dist[i] > maxDist)
+                {
+                    maxDist = dist[i];
+                    lastCell = i;
+                }
+            }
+
+            return lastCell;
+        }
+
+    }
+
     private class MazeCell
     {
         private bool hasSouthWall = true;
         private bool hasRightWall = true;
+        private bool hasSouthLaser = false;
+        private bool hasRightLaser = false;
+        private bool isSouthDestructible = false;
+        private bool isRightDestructible = false;
         private int label = 0;
 
         public MazeCell()
@@ -295,20 +494,57 @@ public class MazeCreator : MonoBehaviour
         {
             return hasSouthWall;
         }
-
         public void DestroySouthWall()
         {
             hasSouthWall = false;
+        }
+
+        public bool HasSouthLaser()
+        {
+            return hasSouthLaser;
+        }
+        public void PlaceSouthLaser()
+        {
+            hasSouthLaser = true;
+        }
+
+        public bool IsSouthDestructible()
+        {
+            return isSouthDestructible;
+        }
+
+        public void WeakenSouthWall()
+        {
+            isSouthDestructible = true;
         }
 
         public bool HasRightWall()
         {
             return hasRightWall;
         }
-
         public void DestroyRightWall()
         {
             hasRightWall = false;
+        }
+
+        public bool HasRightLaser()
+        {
+            return hasRightLaser;
+        }
+
+        public void PlaceRightLaser()
+        {
+            hasRightLaser = true;
+        }
+
+        public bool IsRightDestructible()
+        {
+            return isRightDestructible;
+        }
+
+        public void WeakenRightWall()
+        {
+            isRightDestructible = true;
         }
 
         public int GetLabel()
