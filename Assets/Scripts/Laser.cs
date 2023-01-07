@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Lasers : MonoBehaviour
+public class Laser : MonoBehaviour
 {
     bool poweredOn = true;
 
