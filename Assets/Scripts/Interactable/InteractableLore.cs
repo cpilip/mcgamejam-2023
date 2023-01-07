@@ -1,25 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-enum InteractableLoreType {
-    Note,
-    Audio
-}
 
 public class InteractableLore : Interactable
 {
-    [SerializeField] private InteractableLoreType loreType;
+    private bool hasBeenPlayed;
+    [SerializeField] private string roomName;
+    private string soundName;
+
+    void Start()
+    {
+        hasBeenPlayed = false;
+    }
 
     public override void InteractWith()
     {
-        if (loreType == InteractableLoreType.Note)
-        {
-            Debug.Log("We read the note!");
-        }
-        else if (loreType == InteractableLoreType.Audio)
-        {
+        
             Debug.Log("We listen to the audio!");
-        }
+            
+            if(hasBeenPlayed) 
+            {
+                soundName = string.Concat(roomName, " rewind");
+            }
+            else
+            {
+                soundName = roomName;
+                hasBeenPlayed = true;
+            }
+            
+            FindObjectOfType<AudioManagerScript>().Play(soundName);
+
     }
 
 }
