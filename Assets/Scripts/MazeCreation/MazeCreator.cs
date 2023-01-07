@@ -370,8 +370,8 @@ public class MazeCreator : MonoBehaviour
         GameObject mazeVent = Instantiate(ventPrefab, locationToSpawnVentAt, Quaternion.identity);
 
         mazeWirebox.transform.GetChild(0).GetComponent<InteractableWires>().SetObjectToChange(this.gameObject);
-        mazeWirebox.transform.GetChild(0).GetComponent<DashableVent>().SetVentAsMazeVent();
-        
+        mazeVent.transform.GetChild(0).GetComponent<DashableVent>().SetVentAsMazeVent();
+        CurrentSceneManager.Instance.SetNextScene();
         // TODO Spawn wire and associated functions
     }
 

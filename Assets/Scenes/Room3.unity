@@ -891,6 +891,10 @@ PrefabInstance:
       value: TestRat
       objectReference: {fileID: 0}
     - target: {fileID: 7203445683220229982, guid: 98566cb1f83923a49a097b2c265027ec, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7203445683220229982, guid: 98566cb1f83923a49a097b2c265027ec, type: 3}
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
