@@ -187,7 +187,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectToSpawn: {fileID: 678117338275955532, guid: e07c28599d3c8fe40bc176bbefa3a9e2, type: 3}
-  pos: {x: 1.5, y: 1, z: 0}
+  pos: {x: 1, y: 1, z: 0}
 --- !u!212 &238515515
 SpriteRenderer:
   m_ObjectHideFlags: 0
