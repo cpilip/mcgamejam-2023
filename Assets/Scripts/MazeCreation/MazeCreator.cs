@@ -53,6 +53,8 @@ public class MazeCreator : MonoBehaviour
             for (int col = 0; col < numCols; col++)
             {
                 ellersMaze[row, col] = new MazeCell();
+                
+                // Map cell row/col to node number
                 cellIDToNodeID.Add(row + " " + col, nodeID);
                 nodeIDToCellID.Add(nodeID, row + " " + col);
                 nodeID++;
@@ -71,7 +73,7 @@ public class MazeCreator : MonoBehaviour
         GenerateEllersMaze();
         PlaceLasersAndWeakenWalls();
         ConvertEllersMaze();
-        CalculateWireLocations();
+        CalculateWireLocation();
         //PrintEllersMaze();
     }
 
@@ -255,9 +257,12 @@ public class MazeCreator : MonoBehaviour
         {
             for (int col = 0; col < numCols; col++)
             {
+                // A small buffer to leave the top left with no special walls
                 if (row > 3 || col > 3)
                 {
                     Transform currentMazeCell = unityRows[row].transform.GetChild(col);
+
+                    // 25% chance to change opening into laser
                     if (!ellersMaze[row, col].HasSouthWall())
                     {
                         if (rnd.Next(0, 5) == 1)
@@ -279,6 +284,7 @@ public class MazeCreator : MonoBehaviour
                         }
                     }
 
+                    // 20% chance to change wall into a destructible wall
                     if (ellersMaze[row, col].HasSouthWall() && col != numCols - 1)
                     {
                         if (rnd.Next(0, 6) == 1)
@@ -306,6 +312,10 @@ public class MazeCreator : MonoBehaviour
         {
             for (int col = 0; col < numCols; col++)
             {
+                // Loop through cell row/col, get associated node number
+                // Exploit structure of maze to link to right/south cell if there is an opening
+                // This generates a graph where the links only exist between nodes if there is an opening between cells
+                // We treat lasers like solid walls, so this graph is only the first traversable part of the maze
                 int thisNodeID;
                 cellIDToNodeID.TryGetValue(row + " " + col, out thisNodeID);
 
@@ -324,13 +334,13 @@ public class MazeCreator : MonoBehaviour
 
                     cellGraph.addEdge(thisNodeID, rightNodeID);
                     Debug.Log("R " + thisNodeID + " " + rightNodeID);
-
                 }
             }
         }
     }
-    private void CalculateWireLocations()
+    private void CalculateWireLocation()
     {
+        // BFS search to get the longest possible path from the traversable part of the maze, and get the last cell of that path
         int startNodeID;
         cellIDToNodeID.TryGetValue(0 + " " + 0, out startNodeID);
         int lastNodeID = cellGraph.breadthFirstSearch(startNodeID);
@@ -339,6 +349,8 @@ public class MazeCreator : MonoBehaviour
         nodeIDToCellID.TryGetValue(lastNodeID, out lastCellID);
 
         Debug.Log("Longest path is from " + 0 + " " + 0 + " to " + lastCellID);
+
+        // TODO Spawn wire and associated functions
     }
 
     public void DisableLasers()
