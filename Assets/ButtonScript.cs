@@ -5,13 +5,12 @@ using UnityEngine;
 public class ButtonScript : MonoBehaviour
 {
     // For the code combo: list of booleans (0,0,0,0) -> (0,1,0,0)
-// to check if output corresponds to what we are getting in the right order
-
+    // to check if output corresponds to what we are getting in the right order
 
     private bool isActive;
 
     [SerializeField]
-    GameObject gameObjectToPower;
+    GameObject objectToChange;
 
     // Not active
     void onStart(){
@@ -24,12 +23,14 @@ public class ButtonScript : MonoBehaviour
 
         if (otherObj.gameObject.tag == "Player")
         {
-
-            // this.gameObjectToPower.isActive = true;
+            Debug.Log("Is On!");
 
             this.isActive = true;
 
-            Debug.Log("Is On!");
+            if (objectToChange) 
+            {
+                objectToChange.SendMessage("applyButtonPower");
+            }
         }
 
     }
