@@ -12,14 +12,13 @@ public class DashableGlass : Dashable
         canDash = value;
     }
 
-
     public override void DashThrough()
     {
         if (canDash)
         {
+            canDash = false;
             Debug.Log("Dashing through glass" + this.gameObject.name);
             counter++;
-            canDash = false;
 
             switch (counter)
             {
