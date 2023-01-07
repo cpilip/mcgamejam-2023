@@ -542,11 +542,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numRows: 10
-  numCols: 6
+  numCols: 10
   rowPrefab: {fileID: 4375540502146803634, guid: 693abc1389f4b4f46b8ecf5362f52306, type: 3}
   cellPrefab: {fileID: 6781680609686172566, guid: 8c159a331df545f4ea3c3bd8ca63f89d, type: 3}
+  dynamic: {fileID: 2089394265}
   unityRowPosition: {x: 0, y: 0, z: 0}
-  unityCellPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &2002255908
 GameObject:
   m_ObjectHideFlags: 0
