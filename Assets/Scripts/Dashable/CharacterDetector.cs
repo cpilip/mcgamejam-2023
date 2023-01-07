@@ -31,6 +31,11 @@ public class CharacterDetector : MonoBehaviour
         {
             Debug.Log("Passing through object " + other.gameObject);
             m_current = other.gameObject;
+
+            if (m_current.GetComponent<DashableGlass>())
+            {
+                m_current.GetComponent<DashableGlass>().SetCanDash(true);
+            }
         }
     }
 
@@ -38,6 +43,11 @@ public class CharacterDetector : MonoBehaviour
     {
         if (other.CompareTag("Dashable"))
         {
+            if (m_current.GetComponent<DashableGlass>())
+            {
+                m_current.GetComponent<DashableGlass>().SetCanDash(false);
+            }
+
             if (other.gameObject.Equals(m_current))
             {
                 m_current = null;
