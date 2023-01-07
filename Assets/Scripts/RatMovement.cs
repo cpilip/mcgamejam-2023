@@ -69,4 +69,11 @@ public class RatMovement : MonoBehaviour
             Debug.Log("Entered Vent");
         }
     }
+
+    // private void OnCollisionEnter2D(Collision2D other) {
+    //     if (other.tag == "Laser");
+    //     {
+    //         Scene
+    //     }
+    // }
 }

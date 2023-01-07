@@ -234,6 +234,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &216355587 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1436632844272146194, guid: e07c28599d3c8fe40bc176bbefa3a9e2, type: 3}
+  m_PrefabInstance: {fileID: 1436632843461200664}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &865139565
 GameObject:
   m_ObjectHideFlags: 0
@@ -246,6 +251,7 @@ GameObject:
   - component: {fileID: 865139567}
   - component: {fileID: 865139566}
   - component: {fileID: 865139569}
+  - component: {fileID: 865139570}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -353,6 +359,19 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &865139570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 865139565}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29f1dc132905e4daf3ea0fe058e57b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thingToFollow: {fileID: 216355587}
 --- !u!1 &965335417
 GameObject:
   m_ObjectHideFlags: 0
@@ -631,6 +650,10 @@ PrefabInstance:
     - target: {fileID: 678117338275955532, guid: e07c28599d3c8fe40bc176bbefa3a9e2, type: 3}
       propertyPath: m_Name
       value: Rat and Camera
+      objectReference: {fileID: 0}
+    - target: {fileID: 678117338275955532, guid: e07c28599d3c8fe40bc176bbefa3a9e2, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1514584839778245040, guid: e07c28599d3c8fe40bc176bbefa3a9e2, type: 3}
       propertyPath: m_RootOrder

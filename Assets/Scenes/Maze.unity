@@ -187,7 +187,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectToSpawn: {fileID: 678117338275955532, guid: e07c28599d3c8fe40bc176bbefa3a9e2, type: 3}
-  pos: {x: 1, y: 1, z: 0}
+  pos: {x: 0.25, y: 0.75, z: 0}
 --- !u!212 &238515515
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -248,7 +248,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 238515513}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.75, y: 0.57, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -428,7 +428,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &591605926
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -776,7 +776,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1237264257}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.8056488, y: -0.17516175, z: -15.054817}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
