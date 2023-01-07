@@ -36,6 +36,11 @@ public class CharacterDetector : MonoBehaviour
             {
                 m_current.GetComponent<DashableGlass>().SetCanDash(true);
             }
+
+            if (m_current.GetComponent<DashableWiresBox>())
+            {
+                m_current.GetComponent<DashableWiresBox>().SetCanDash(true);
+            }
         }
     }
 
@@ -46,6 +51,11 @@ public class CharacterDetector : MonoBehaviour
             if (m_current.GetComponent<DashableGlass>())
             {
                 m_current.GetComponent<DashableGlass>().SetCanDash(false);
+            }
+
+            if (m_current.GetComponent<DashableWiresBox>())
+            {
+                m_current.GetComponent<DashableWiresBox>().SetCanDash(false);
             }
 
             if (other.gameObject.Equals(m_current))

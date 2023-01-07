@@ -28,6 +28,7 @@ public class CharacterInteractor : MonoBehaviour
         {
             Debug.Log("Setting m_current");
             m_current = other.gameObject;
+
         }
     }
 

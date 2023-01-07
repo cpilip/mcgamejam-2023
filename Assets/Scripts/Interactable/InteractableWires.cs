@@ -15,7 +15,6 @@ public class InteractableWires : Interactable
         {
             objectToChange.SendMessage("ApplyWireEffect");
         }
-        
     }
 
     public void SetObjectToChange(GameObject obj)
