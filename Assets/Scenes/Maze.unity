@@ -3326,7 +3326,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 2
-      m_TileSpriteIndex: 2
+      m_TileSpriteIndex: 6
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -6575,16 +6575,16 @@ Tilemap:
     m_Data: {fileID: 21300000, guid: d6776a6db177f7d46991485ce4569fee, type: 3}
   - m_RefCount: 4
     m_Data: {fileID: 21300000, guid: 11253359dab8a8e40ba3a4747a8916c3, type: 3}
-  - m_RefCount: 1
-    m_Data: {fileID: 21300000, guid: 879637e97a1f1154590011ca03a58545, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 1
     m_Data: {fileID: 21300000, guid: 97f5623011eb01f42972878f0051e987, type: 3}
   - m_RefCount: 16
     m_Data: {fileID: 21300000, guid: da6a4c28bb8d3cb4b9add6bd4390d6d6, type: 3}
   - m_RefCount: 9
     m_Data: {fileID: 21300000, guid: 3cd129daa5d0c1a4ba9a81ed21890333, type: 3}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: 21300000, guid: 879637e97a1f1154590011ca03a58545, type: 3}
   - m_RefCount: 512
     m_Data: {fileID: 21300000, guid: f36285883898a9348b8dcb1e8a0b048d, type: 3}
   m_TileMatrixArray:
@@ -6679,10 +6679,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numRows: 8
   numCols: 8
-  rowPrefab: {fileID: 4375540502146803634, guid: 693abc1389f4b4f46b8ecf5362f52306, type: 3}
+  rowPrefab: {fileID: 6264395156310501041, guid: 1fe6a977f9cdb294c9d88a1d49655fd1, type: 3}
   cellPrefab: {fileID: 6781680609686172566, guid: 8c159a331df545f4ea3c3bd8ca63f89d, type: 3}
   wireboxPrefab: {fileID: 1041746461930280468, guid: ee1ba7859a6cbe74bb4954f0613f8790, type: 3}
   ventPrefab: {fileID: 1041746461930280468, guid: 6cd8a948c07cf1e4cafa56257cbbfefc, type: 3}
+  dashTriggerPrefab: {fileID: 5782723415162491836, guid: 74fb55331ab25b64cae237779ff45e43, type: 3}
+  laserTriggerPrefab: {fileID: 5555860716945158968, guid: b7194d3dc74c15d45bec81c25f2bf522, type: 3}
+  laserTriggerPrefabS: {fileID: 622543610835070657, guid: 83bd7fa9d61559741a2da63b71e870a2, type: 3}
+  laserRightSprite: {fileID: 21300000, guid: 120ae8872457e3a41a399e7083e256ad, type: 3}
+  laserSouthSprite: {fileID: 21300000, guid: 4699d45b9b8200a4584930001f9e0d18, type: 3}
+  wallCrackedSprite: {fileID: 21300000, guid: c194bdcda7db1d949a8dbf1ed21798e4, type: 3}
   dynamic: {fileID: 2089394265}
   unityRowPosition: {x: 0, y: 0, z: 0}
   ratSpawnPosition: {x: -2.4, y: 0.7, z: 0}
