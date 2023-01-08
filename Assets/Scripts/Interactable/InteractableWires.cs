@@ -7,6 +7,9 @@ public class InteractableWires : Interactable
     [SerializeField]
     GameObject objectToChange;
 
+    [SerializeField]
+    Sprite chewedSprite;
+
     public override void InteractWith()
     {
         Debug.Log("Wires are chewed.");
@@ -15,6 +18,9 @@ public class InteractableWires : Interactable
         {
             objectToChange.SendMessage("ApplyWireEffect");
         }
+
+        GameObject wiresBox = gameObject.transform.parent.gameObject;
+        wiresBox.GetComponent<SpriteRenderer>().sprite = chewedSprite;
     }
 
     public void SetObjectToChange(GameObject obj)

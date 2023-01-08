@@ -4,18 +4,32 @@ using UnityEngine;
 
 public class Laser : MonoBehaviour
 {
-    bool poweredOn = true;
+
+    [SerializeField]
+    Sprite laserOffSprite;
 
     void OnTriggerEnter2D(Collider2D otherObj) {
         if (otherObj.gameObject.tag == "Player") {
             Debug.Log("ded");
             // dies
+            MazeCreator.Instance.ResetRat();
         }
     }
 
     void TurnOffLaser()
     {
-        this.poweredOn = false;
         this.GetComponent<BoxCollider2D>().enabled = false;
+        this.GetComponent<SpriteRenderer>().sprite = laserOffSprite;
+    }
+
+    public void ApplyWireEffect() 
+    {
+        this.GetComponent<SpriteRenderer>().sprite = laserOffSprite;
+
+        this.GetComponent<BoxCollider2D>().enabled = false;
+    }
+
+    public void applyButtonPower() {
+        TurnOffLaser();
     }
 }
