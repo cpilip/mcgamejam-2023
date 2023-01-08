@@ -136,7 +136,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8978644575616324712, guid: 30ae1e7b7510de841979aa86171add06, type: 3}
       propertyPath: roomName
-      value: Room4
+      value: Room1
       objectReference: {fileID: 0}
     - target: {fileID: 8978644575616324712, guid: 30ae1e7b7510de841979aa86171add06, type: 3}
       propertyPath: subtitles
