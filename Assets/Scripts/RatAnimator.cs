@@ -48,17 +48,23 @@ public class RatAnimator : MonoBehaviour
         anim.SetTrigger("Nibble");
     }
 
-    public void TryWakeup()
+    public IEnumerator TryWakeup()
     {
         anim.SetTrigger("Wakeup");
+        yield return new WaitForSeconds(1.5f);
+        initialized = true;
+    }
+
+    public bool GetInitialized()
+    {
+        return initialized;
     }
 
     public void Update()
     {
         if (Input.anyKey && initialized == false)
         {
-            initialized = true;
-            TryWakeup();
+            StartCoroutine(TryWakeup());
         }
     }
 }
