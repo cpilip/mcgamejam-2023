@@ -2272,6 +2272,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rat and Camera
       objectReference: {fileID: 0}
+    - target: {fileID: 1430486227961043367, guid: e07c28599d3c8fe40bc176bbefa3a9e2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.17516172
+      objectReference: {fileID: 0}
     - target: {fileID: 1514584839778245040, guid: e07c28599d3c8fe40bc176bbefa3a9e2, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -2282,7 +2286,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1514584839778245040, guid: e07c28599d3c8fe40bc176bbefa3a9e2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.17516175
+      value: 0.65
       objectReference: {fileID: 0}
     - target: {fileID: 1514584839778245040, guid: e07c28599d3c8fe40bc176bbefa3a9e2, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4819,7 +4823,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 6
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -4843,7 +4847,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1660622917}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: 0.8251617, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
