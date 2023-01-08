@@ -15,7 +15,7 @@ public class CharacterDetector : MonoBehaviour
     void Update()
     {
         // TODO Make sure character is in dash state
-        if (m_current)
+        if (m_current && this.gameObject.GetComponent<RatMovement>().isDashing)
         {
             m_current.SendMessage("DashThrough");
         }

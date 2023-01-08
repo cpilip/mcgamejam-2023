@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ButtonScript : MonoBehaviour
 {
@@ -27,6 +28,14 @@ public class ButtonScript : MonoBehaviour
 
             this.isActive = true;
 
+            //Room check here
+            //GameObject shadow = otherObj.gameObject.transform.get;
+            //objectToChange = shadow;
+            if (SceneManager.GetActiveScene().name == "Room4")
+            {
+                otherObj.transform.GetChild(0).gameObject.SendMessage("applyButtonPower");;
+            }
+            
             if (objectToChange) 
             {
                 objectToChange.SendMessage("applyButtonPower");
@@ -43,6 +52,6 @@ public class ButtonScript : MonoBehaviour
     public void setPressed(bool active)
     {
         this.isActive = active;
-        }
+    }
 
 }
