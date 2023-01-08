@@ -6,7 +6,6 @@ public class DashableGap : Dashable
 {
     public override void DashThrough()
     {
-        Debug.Log("Dashing through gap " + this.gameObject.name);
-        // TODO Kill player
+        Debug.Log("Dashing through gap" + this.gameObject.name);
     }
 }
