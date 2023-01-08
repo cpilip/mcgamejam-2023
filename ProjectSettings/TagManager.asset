@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Dashable
   - Interactable
+  - Deadly
   layers:
   - Default
   - TransparentFX

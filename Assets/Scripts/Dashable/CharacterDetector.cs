@@ -19,14 +19,28 @@ public class CharacterDetector : MonoBehaviour
         {
             m_current.SendMessage("DashThrough");
         }
+        // else if m_current && character is NOT  in dash state && m_current.gameObject.name.contains(`JumpOver`);
+        /*else if (m_current && this.CompareTag("Walking")) {
+            m_current.SendMessage("NotDashingAnymore")
+        }*/
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Dashable"))
         {
-            Debug.Log("Hit wall at object " + other.gameObject);
+            Debug.Log("Passing through object " + other.gameObject);
             m_current = other.gameObject;
+
+            if (m_current.GetComponent<DashableGlass>())
+            {
+                m_current.GetComponent<DashableGlass>().SetCanDash(true);
+            }
+
+            if (m_current.GetComponent<DashableWiresBox>())
+            {
+                m_current.GetComponent<DashableWiresBox>().SetCanDash(true);
+            }
         }
     }
 
@@ -34,6 +48,16 @@ public class CharacterDetector : MonoBehaviour
     {
         if (other.CompareTag("Dashable"))
         {
+            if (m_current.GetComponent<DashableGlass>())
+            {
+                m_current.GetComponent<DashableGlass>().SetCanDash(false);
+            }
+
+            if (m_current.GetComponent<DashableWiresBox>())
+            {
+                m_current.GetComponent<DashableWiresBox>().SetCanDash(false);
+            }
+
             if (other.gameObject.Equals(m_current))
             {
                 m_current = null;
