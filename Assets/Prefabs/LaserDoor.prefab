@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 1399237313546662348}
   - component: {fileID: 1399237313546662349}
   - component: {fileID: 1399237313546662338}
-  - component: {fileID: 1399237313546662339}
+  - component: {fileID: 1619467693533241344}
   m_Layer: 0
-  m_Name: Laser
+  m_Name: LaserDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 00206cf9cc07f8e458441c1eb82fff60, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fa74d8979a4e9ed44b44de381e1f1c94, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -112,7 +112,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.15, y: 1}
   m_EdgeRadius: 0
---- !u!114 &1399237313546662339
+--- !u!114 &1619467693533241344
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -121,7 +121,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1399237313546662351}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc289d1834bb16646b2f8dba638e4606, type: 3}
+  m_Script: {fileID: 11500000, guid: cfe97923be8956b4e8867180090b1db4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  laserOffSprite: {fileID: 21300000, guid: 2465925274a895144807ecead37e9795, type: 3}
+  laserDoorOffSprite: {fileID: 21300000, guid: b02e2f85b83dbb240a65804bbf594793, type: 3}

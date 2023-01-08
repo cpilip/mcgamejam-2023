@@ -7,10 +7,13 @@ public class InteractableLabCoat : Interactable
     [SerializeField]
     GameObject popUpKeyCollected;
 
+    public bool keyCollected = false;
+
     public override void InteractWith()
     {
         Debug.Log("key collected!");
         popUpKeyCollected.GetComponent<FadingEffect>().canFade = true;
+        keyCollected = true;
 
     }
 
