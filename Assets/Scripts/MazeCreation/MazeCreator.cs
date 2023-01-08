@@ -27,6 +27,12 @@ public class MazeCreator : MonoBehaviour
     [SerializeField] private GameObject cellPrefab;
     [SerializeField] private GameObject wireboxPrefab;
     [SerializeField] private GameObject ventPrefab;
+    [SerializeField] private GameObject dashTriggerPrefab;
+    [SerializeField] private GameObject laserTriggerPrefab;
+    [SerializeField] private GameObject laserTriggerPrefabS;
+    [SerializeField] private Sprite laserRightSprite;
+    [SerializeField] private Sprite laserSouthSprite;
+    [SerializeField] private Sprite wallCrackedSprite;
     [SerializeField] private GameObject dynamic;
     [SerializeField] private Vector3 unityRowPosition = new Vector3(0f, 0f, 0f); //Initial row's Unity position
     [SerializeField] private Vector3 ratSpawnPosition = new Vector3(-2.4f, 0.7f, 0f); //Initial row's Unity position
@@ -271,44 +277,59 @@ public class MazeCreator : MonoBehaviour
                     Transform currentMazeCell = unityRows[row].transform.GetChild(col);
 
                     // 25% chance to change opening into laser
-                    if (!ellersMaze[row, col].HasSouthWall())
+                    if (!ellersMaze[row, col].HasSouthWall() && row < numRows - 1)
                     {
                         if (rnd.Next(0, 5) == 1)
                         {
                             ellersMaze[row, col].PlaceSouthLaser();
                             currentMazeCell.GetChild(1).gameObject.SetActive(true);
-                            currentMazeCell.GetChild(1).gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+                            currentMazeCell.GetChild(1).gameObject.GetComponent<SpriteRenderer>().sprite = laserSouthSprite; //Set sprite to laser_0
+                            currentMazeCell.GetChild(1).gameObject.GetComponent<Collider2D>().enabled = false;
                             lasers.Add(currentMazeCell.GetChild(1).gameObject);
-                            currentMazeCell.GetChild(1).gameObject.AddComponent<MazeLaser>();
+
+                            GameObject laserTrigger = Instantiate(laserTriggerPrefabS, currentMazeCell.GetChild(1).gameObject.transform.position, Quaternion.identity);
+                            laserTrigger.transform.eulerAngles = new Vector3(zero.x, zero.y, 90f);
+                            laserTrigger.transform.SetParent(currentMazeCell.GetChild(1).gameObject.transform);
+
                         }
                     }
-                    if (!ellersMaze[row, col].HasRightWall())
+                    if (!ellersMaze[row, col].HasRightWall() && col < numCols - 1)
                     {
                         if (rnd.Next(0, 5) == 1)
                         {
                             ellersMaze[row, col].PlaceRightLaser();
                             currentMazeCell.GetChild(0).gameObject.SetActive(true);
-                            currentMazeCell.GetChild(0).gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+                            currentMazeCell.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = laserRightSprite; //Set sprite to laser_1
+                            currentMazeCell.GetChild(0).gameObject.GetComponent<Collider2D>().enabled = false;
                             lasers.Add(currentMazeCell.GetChild(0).gameObject);
-                            currentMazeCell.GetChild(0).gameObject.AddComponent<MazeLaser>();
+
+                            GameObject laserTrigger = Instantiate(laserTriggerPrefab, currentMazeCell.GetChild(0).gameObject.transform.position, Quaternion.identity);
+                            laserTrigger.transform.SetParent(currentMazeCell.GetChild(0).gameObject.transform);
                         }
                     }
 
-                    // 20% chance to change wall into a destructible wall
-                    if (ellersMaze[row, col].HasSouthWall() && row < numRows - 1)
-                    {
-                        if (rnd.Next(0, 6) == 1)
-                        {
-                            ellersMaze[row, col].WeakenSouthWall();
-                            currentMazeCell.GetChild(1).gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
-                        }
-                    }
+                    //20 % chance to change wall into a destructible wall
+                    //if (ellersMaze[row, col].HasSouthWall() && row < numRows - 1)
+                    //{
+                    //    if (rnd.Next(0, 6) == 1)
+                    //    {
+                    //        ellersMaze[row, col].WeakenSouthWall();
+                    //        currentMazeCell.GetChild(1).gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
+
+                    //        GameObject dashTrigger = Instantiate(dashTriggerPrefab, currentMazeCell.GetChild(1).gameObject.transform.position, Quaternion.identity);
+                    //        dashTrigger.transform.SetParent(currentMazeCell.GetChild(1).gameObject.transform);
+                    //    }
+                    //}
                     if (ellersMaze[row, col].HasRightWall() && col < numCols - 1)
                     {
                         if (rnd.Next(0, 6) == 1)
                         {
                             ellersMaze[row, col].WeakenRightWall();
-                            currentMazeCell.GetChild(0).gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
+                            currentMazeCell.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = wallCrackedSprite; //Set sprite to laser_
+                            //currentMazeCell.GetChild(0).gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
+
+                            GameObject dashTrigger = Instantiate(dashTriggerPrefab, currentMazeCell.GetChild(0).gameObject.transform.position, Quaternion.identity);
+                            dashTrigger.transform.SetParent(currentMazeCell.GetChild(0).gameObject.transform);
                         }
                     }
                 }
