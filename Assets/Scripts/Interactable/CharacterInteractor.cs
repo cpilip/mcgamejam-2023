@@ -8,7 +8,7 @@ public class CharacterInteractor : MonoBehaviour
 
     void Awake()
     {
-        DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(gameObject.transform.parent);
         m_current = null;
     }
 
