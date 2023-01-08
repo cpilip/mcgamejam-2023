@@ -13,11 +13,18 @@ public class EndingCutscene : MonoBehaviour
 
     private void Start()
     {
+        //parentOfAnimation.transform.GetChild(1).gameObject.SetActive(true);
+        StartCoroutine(WaitABit());
+    }
+    IEnumerator WaitABit()
+    {
+        yield return new WaitForSeconds(5.0f); 
         StartCoroutine(FadeOutOrIn());
     }
 
-    IEnumerator FadeOutOrIn(bool fadeToBlack = true, int fadeSpeed = 1)
+    IEnumerator FadeOutOrIn(bool fadeToBlack = true, float fadeSpeed = .75f)
     {
+        //yield return new WaitForSeconds(3.0f);
         Color objectColor = current.GetComponent<Image>().color;
         float fadeAmount;
 
@@ -31,8 +38,6 @@ public class EndingCutscene : MonoBehaviour
                 current.GetComponent<Image>().color = objectColor;
                 yield return null;
             }
-
-            
             
             if (currentIndex == 16)
             {
@@ -50,10 +55,12 @@ public class EndingCutscene : MonoBehaviour
 
     IEnumerator WaitForCredits()
     {
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(7.0f);
         finale.SetActive(true);
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(5.0f);
         creditsTime.SetActive(true);
+
+        //Continue credits here
     }
     
 }
