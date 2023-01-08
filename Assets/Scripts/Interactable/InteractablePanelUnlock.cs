@@ -9,6 +9,9 @@ public class InteractablePanelUnlock : Interactable
     [SerializeField]
     GameObject labCoat;
 
+    [SerializeField]
+    Sprite openedSprite;
+
     public void Start()
     {
         wiresGameObject.GetComponent<Collider2D>().enabled = false;
@@ -21,6 +24,8 @@ public class InteractablePanelUnlock : Interactable
         {
             Debug.Log("Unlocked Panel");
             // change sprite to open
+
+             this.GetComponent<SpriteRenderer>().sprite = openedSprite;
 
             wiresGameObject.GetComponent<BoxCollider2D>().enabled = true;
             this.GetComponent<BoxCollider2D>().enabled = false;
