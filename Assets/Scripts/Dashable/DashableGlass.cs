@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class DashableGlass : Dashable
 {
+    [SerializeField]
+    Sprite glassCrackedABit;
+    [SerializeField]
+    Sprite glassCrackedALot;
+    [SerializeField]
+    Sprite glassOpen;
+
     int counter = 0;
     bool canDash = false;
 
@@ -25,14 +32,18 @@ public class DashableGlass : Dashable
                 case 1:
                     // Sprite a lil cracked
                     Debug.Log("cracked the glass a bit" + this.gameObject.name);
+                    this.GetComponentInParent<SpriteRenderer>().sprite = glassCrackedABit;
                     break;
                 case 2:
                     // Sprite cracked glass
                     Debug.Log("cracked the glass a lot" + this.gameObject.name);
+                    this.GetComponentInParent<SpriteRenderer>().sprite = glassCrackedALot;
                     break;
                 case 3:
-                    this.transform.parent.gameObject.SetActive(false);
-                    this.gameObject.SetActive(false);
+                    this.transform.parent.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+                    this.GetComponentInParent<BoxCollider2D>().enabled = false;
+                    this.GetComponentInParent<SpriteRenderer>().sprite = glassCrackedALot;
+                    this.gameObject.transform.GetChild(0).GetComponent<EndButton>().ActivateEndButton();
                     break;
             }
         }

@@ -71,9 +71,22 @@ public class CurrentSceneManager : MonoBehaviour
             player = GameObject.FindGameObjectsWithTag("Player")[0];
         }
 
+        if (scene.name == "Room4")
+        {
+            player.transform.GetChild(0).gameObject.SetActive(true);
+        }
+
         if (scene.name != "TitlePage")
         {
             player.transform.position = roomSpawnLocations[currentRoomIndex];
+        }
+    }
+
+    void Update()
+    {
+        if (Input.GetKey("escape")) 
+        {
+            Application.Quit();
         }
     }
 }
