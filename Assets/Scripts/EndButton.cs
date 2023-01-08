@@ -6,6 +6,9 @@ using UnityEngine.SceneManagement;
 public class EndButton : MonoBehaviour
 {
     private bool isActive;
+
+[SerializeField] GameObject LoreObj;
+
     // Not active
     void onStart(){
         isActive = false;
@@ -16,6 +19,8 @@ public class EndButton : MonoBehaviour
 
         if (otherObj.gameObject.tag == "Player" && this.isActive)
         {
+            // just interact with 
+            LoreObj.SendMessage("InteractWith");
             SceneManager.LoadScene("EndSceneCredits");
         }
 
@@ -23,6 +28,6 @@ public class EndButton : MonoBehaviour
 
     public void ActivateEndButton()
     {
-        isActive = true;
+        isActive = true; 
     }
 }
