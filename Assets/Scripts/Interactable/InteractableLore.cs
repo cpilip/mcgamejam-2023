@@ -26,26 +26,20 @@ public class InteractableLore : Interactable
     {
         
             Debug.Log("We listen to the audio!");
-            
-            // TEST CODE
-            soundName = roomName;
 
-            // FINAL, WITH "REWIND" TRACKS
-            // if(hasBeenPlayed) 
-            // {
-            //     soundName = string.Concat(roomName, " rewind");
-            // }
-            // else
-            // {
-            //     soundName = roomName;
-            //     hasBeenPlayed = true;
-            // }
-
-            CurrentSceneManager.Instance.SwapToMaze();
+            // WILL ADD "REWIND" TRACKS TO PLAY BACK ONLY THE HINT
+            if(hasBeenPlayed) 
+            {
+                //soundName = string.Concat(roomName, " rewind");
+                soundName = roomName;
+            }
+            else
+            {
+                soundName = roomName;
+                hasBeenPlayed = true;
+            }
 
             FindObjectOfType<AudioManagerScript>().Play(soundName);
-
-            // TEST CODE
 
     }
 
