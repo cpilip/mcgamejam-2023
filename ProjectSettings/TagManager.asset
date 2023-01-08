@@ -7,6 +7,7 @@ TagManager:
   - Dashable
   - Interactable
   - Deadly
+  - PopUp
   layers:
   - Default
   - TransparentFX

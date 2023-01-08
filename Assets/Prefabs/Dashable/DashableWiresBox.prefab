@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1041746461930280469}
   - component: {fileID: 1041746461930280471}
-  - component: {fileID: 1041746461930280470}
+  - component: {fileID: 1751673560881109819}
   m_Layer: 0
   m_Name: DashableWiresBox
   m_TagString: Untagged
@@ -86,7 +86,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &1041746461930280470
+--- !u!61 &1751673560881109819
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
