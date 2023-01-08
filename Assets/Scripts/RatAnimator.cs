@@ -60,6 +60,11 @@ public class RatAnimator : MonoBehaviour
         return initialized;
     }
 
+    public void ResetInitialized()
+    {
+        initialized = false;
+    }
+
     public void Update()
     {
         if (Input.anyKey && initialized == false)
