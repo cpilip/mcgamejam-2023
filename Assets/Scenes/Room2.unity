@@ -1448,7 +1448,7 @@ PrefabInstance:
     - target: {fileID: 8633640483771353946, guid: e3ef6a341a824d94687b536277f8555a, type: 3}
       propertyPath: chewedSprite
       value: 
-      objectReference: {fileID: 21300000, guid: 540dac00a199f402e95f28800de20946, type: 3}
+      objectReference: {fileID: 21300000, guid: 3e089c5868d710946b8acfa3951da774, type: 3}
     - target: {fileID: 8633640483771353946, guid: e3ef6a341a824d94687b536277f8555a, type: 3}
       propertyPath: objectToChange
       value: 
