@@ -114,4 +114,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e262e5fc17137b4fac5bddcd5ef9a87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameObjectToPower: {fileID: 0}
+  objectToChange: {fileID: 0}
