@@ -30,7 +30,7 @@ public class ButtonScript : MonoBehaviour
         if (otherObj.gameObject.tag == "Player" && !this.isActive)
         {
             Debug.Log("Is On!");
-            FindObjectOfType<AudioManagerScript>().Play("ButtonPress");
+            //FindObjectOfType<AudioManagerScript>().Play("ButtonPress");
 
             this.setPressed(true);
 
