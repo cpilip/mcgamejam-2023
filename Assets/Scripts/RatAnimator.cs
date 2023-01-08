@@ -4,26 +4,25 @@ using UnityEngine;
 
 public class RatAnimator : MonoBehaviour
 {
-    private static RatAnimator instance = null;
+    private static RatAnimator _instance;
+
+    public static RatAnimator Instance { get { return _instance; } }
+
     private bool initialized = false;
     [SerializeField] private Animator anim;
-    private RatAnimator()
-    {
-    }
 
-    public static RatAnimator Instance
+    private void Awake()
     {
-        get
+        if (_instance != null && _instance != this)
         {
-            if (instance == null)
-            {
-                instance = new RatAnimator();
-            }
-            return instance;
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            _instance = this;
         }
     }
 
-    
     public bool GetIsRunning()
     {
         return anim.GetBool("isRunning");
@@ -56,7 +55,7 @@ public class RatAnimator : MonoBehaviour
 
     public void Update()
     {
-        if (Input.anyKey && !initialized)
+        if (Input.anyKey && initialized == false)
         {
             initialized = true;
             TryWakeup();

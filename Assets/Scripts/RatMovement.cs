@@ -36,7 +36,7 @@ public class RatMovement : MonoBehaviour
             }
         }
 
-        if (Input.GetAxisRaw("Horizontal") != 0 && Input.GetAxisRaw("Vertical") != 0)
+        if (Input.GetAxisRaw("Horizontal") == 0 && Input.GetAxisRaw("Vertical") == 0)
         {
             RatAnimator.Instance.SetIsRunning(false);
         }
