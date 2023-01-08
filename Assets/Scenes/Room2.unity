@@ -612,7 +612,7 @@ Transform:
   - {fileID: 257330765}
   - {fileID: 845577661}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &342528339
 GameObject:
@@ -883,6 +883,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8978644575616324712, guid: 30ae1e7b7510de841979aa86171add06, type: 3}
+      propertyPath: roomName
+      value: Room1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8978644575616324712, guid: 30ae1e7b7510de841979aa86171add06, type: 3}
       propertyPath: soundName
       value: Room1
       objectReference: {fileID: 0}
@@ -962,7 +966,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &485900646
 MonoBehaviour:
@@ -984,7 +988,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: BGM
     clip: {fileID: 8300000, guid: 18af1d4835be24d9d9fc8ec315b73852, type: 3}
-    volume: 1
+    volume: 0.7
     pitch: 1
     source: {fileID: 0}
 --- !u!1 &550916824
@@ -1732,7 +1736,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1710622859
 GameObject:

@@ -13,6 +13,15 @@ public class InteractableLore : Interactable
         hasBeenPlayed = false;
     }
 
+// TEST CODE
+    // void Update()
+    // {
+    //     if (Input.GetKeyDown("space"))
+    //     {
+    //         InteractWith();
+    //     }
+    // }
+
     public override void InteractWith()
     {
         
