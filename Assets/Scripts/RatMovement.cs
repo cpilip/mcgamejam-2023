@@ -74,6 +74,14 @@ public class RatMovement : MonoBehaviour
         {
             dashCoolCounter -= Time.deltaTime;
         }
+
+        if (Input.GetKeyDown(KeyCode.Y))
+        {
+            FindObjectOfType<RatAnimator>().TrySqueak();
+            int squeakInt = Random.Range(1,8);
+            string squeakNum = squeakInt.ToString();
+            FindObjectOfType<AudioManagerScript>().Play("Squeak"+squeakNum);
+        }
     }
 
     void OnTriggerEnter2D(Collider2D other) {
@@ -89,6 +97,7 @@ public class RatMovement : MonoBehaviour
 
         }
     }
+
 
     // private void OnCollisionEnter2D(Collision2D other) {
     //     if (other.tag == "Laser");
