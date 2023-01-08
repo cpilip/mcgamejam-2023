@@ -88,6 +88,10 @@ PrefabInstance:
       propertyPath: m_Follow
       value: 
       objectReference: {fileID: 1436632844272146198}
+    - target: {fileID: 15175806935100521, guid: 61bb171583b095247b1937af0927c776, type: 3}
+      propertyPath: m_Lens.OrthographicSize
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 15175806935100526, guid: 61bb171583b095247b1937af0927c776, type: 3}
       propertyPath: m_Name
       value: VC Follow Rat

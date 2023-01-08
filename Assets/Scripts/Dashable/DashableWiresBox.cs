@@ -18,6 +18,7 @@ public class DashableWiresBox : Dashable
             canDash = false;
             Debug.Log("Open box and display chewable wires" + this.gameObject.name);
             this.transform.gameObject.tag = "Interactable";
+            this.transform.parent.GetComponent<Collider2D>().enabled = false;
     	}
         // TODO swap sprite
     }
