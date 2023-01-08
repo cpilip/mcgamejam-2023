@@ -13,6 +13,7 @@ public class SubtitleScript : MonoBehaviour
 
     void Start()
     {
+        DontDestroyOnLoad(gameObject);
         subtitles.enabled = false;
         subtitleBackground.enabled = false;
     }
