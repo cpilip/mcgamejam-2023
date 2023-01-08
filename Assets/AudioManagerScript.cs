@@ -9,14 +9,13 @@ public class AudioManagerScript : MonoBehaviour
 
     void Start()
     {
+        DontDestroyOnLoad(gameObject);
         Play("BGM");
     }
 
     // Start is called before the first frame update
     void Awake()
     {
-        DontDestroyOnLoad(gameObject);
-
        foreach (Sound s in sounds)
        {
             s.source = gameObject.AddComponent<AudioSource>();
