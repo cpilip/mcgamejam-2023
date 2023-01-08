@@ -15,7 +15,7 @@ public class CurrentSceneManager : MonoBehaviour
     private List<Vector3> roomSpawnLocations = new List<Vector3>() {
         new Vector3(6.21f, -3.76f, -1f),
         new Vector3(-4.36f, -1.8f, -1f),
-        new Vector3(-1.28f, 3.32f, -1f),
+        new Vector3(-1.28f, 4.32f, -1f),
         new Vector3(-4.33f, 2.32f, -1f)};
 
     [SerializeField] private GameObject player;
