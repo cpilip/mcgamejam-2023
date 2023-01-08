@@ -33,12 +33,14 @@ public class RatMovement : MonoBehaviour
             if (!RatAnimator.Instance.GetIsRunning())
             {
                 RatAnimator.Instance.SetIsRunning(true);
+                FindObjectOfType<AudioManagerScript>().Play("Walk");
             }
         }
 
         if (Input.GetAxisRaw("Horizontal") == 0 && Input.GetAxisRaw("Vertical") == 0)
         {
             RatAnimator.Instance.SetIsRunning(false);
+            FindObjectOfType<AudioManagerScript>().Stop("Walk");
         }
 
         movement.x = Input.GetAxisRaw("Horizontal");
@@ -55,6 +57,7 @@ public class RatMovement : MonoBehaviour
                 activeMoveSpeed = dashSpeed;
                 dashCounter = dashLength;
                 isDashing = true;
+                FindObjectOfType<AudioManagerScript>().Play("Dash");
             }
         }
 

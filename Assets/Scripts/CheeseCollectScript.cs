@@ -14,6 +14,7 @@ public class CheeseCollectScript : MonoBehaviour
 
             // Destroy the cheese
             Destroy(this.gameObject);
+            FindObjectOfType<AudioManagerScript>().Play("Nibble");
         }
 
     }
