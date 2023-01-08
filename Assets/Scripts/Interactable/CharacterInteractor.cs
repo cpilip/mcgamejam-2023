@@ -17,6 +17,7 @@ public class CharacterInteractor : MonoBehaviour
         if (Input.GetButtonDown("interact") && m_current)
         {
             m_current.SendMessage("InteractWith");
+            RatAnimator.Instance.TryInteract();
         }
     }
     
