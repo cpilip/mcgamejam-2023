@@ -13,6 +13,7 @@ public class CheeseCollectScript : MonoBehaviour
             //collision.gameObject.playercontroller.addCheese();
 
             // Destroy the cheese
+            RatAnimator.Instance.TryNibble();
             Destroy(this.gameObject);
         }
 

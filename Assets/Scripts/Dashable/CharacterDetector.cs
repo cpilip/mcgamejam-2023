@@ -18,6 +18,7 @@ public class CharacterDetector : MonoBehaviour
         if (m_current && this.gameObject.GetComponent<RatMovement>().isDashing)
         {
             m_current.SendMessage("DashThrough");
+            
         }
         // else if m_current && character is NOT  in dash state && m_current.gameObject.name.contains(`JumpOver`);
         /*else if (m_current && this.CompareTag("Walking")) {
