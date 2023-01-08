@@ -75,8 +75,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.51771086, g: 0.990566, b: 0.95974696, a: 1}
+  m_Sprite: {fileID: 21300000, guid: ce1d5e0903c8db148b1aa2fa7a799233, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c90f6a654ca1e3647bcb8e1db31695fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loreType: 0
+  roomName: 
 --- !u!61 &8978644575616324715
 BoxCollider2D:
   m_ObjectHideFlags: 0
