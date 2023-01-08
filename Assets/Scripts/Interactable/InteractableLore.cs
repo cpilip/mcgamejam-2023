@@ -7,7 +7,6 @@ public class InteractableLore : Interactable
 {
     private bool hasBeenPlayed;
     [SerializeField] public string roomName;
-    private string soundName;
 
     void Start()
     {
@@ -25,19 +24,23 @@ public class InteractableLore : Interactable
             //     hasBeenPlayed = false;
             // }
             
-            if(hasBeenPlayed) 
-            {
-                soundName = string.Concat(roomName, " rewind");
-                soundName = roomName;
-            }
-            else
-            {
-                soundName = roomName;
-                //hasBeenPlayed = true;
-            }
+            // if(hasBeenPlayed) 
+            // {
+            //     soundName = string.Concat(roomName, " rewind");
+            // }
+            // else
+            // {
+            //     soundName = roomName;
+            //     hasBeenPlayed = true;
+            // }
         
-            // FindObjectOfType<AudioManagerScript>().Play(soundName);
             FindObjectOfType<AudioManagerScript>().Play(roomName);
+
+            if(roomName=="Room4")
+            {
+               FindObjectOfType<AudioManagerScript>().Stop("BGM"); 
+            }
+
             FindObjectOfType<SubtitleScript>().displaySubtitles();
             
     }
