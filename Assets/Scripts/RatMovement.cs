@@ -18,6 +18,7 @@ public class RatMovement : MonoBehaviour
     private float dashCoolCounter;
 
     public bool isDashing;
+    private bool facingRight = true;
 
     void Start() {
         activeMoveSpeed = moveSpeed;
@@ -28,51 +29,71 @@ public class RatMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
+        if (RatAnimator.Instance.GetInitialized())
         {
-            if (!RatAnimator.Instance.GetIsRunning())
+
+
+            if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
             {
-                RatAnimator.Instance.SetIsRunning(true);
+                if (!RatAnimator.Instance.GetIsRunning())
+                {
+                    RatAnimator.Instance.SetIsRunning(true);
+                }
             }
-        }
 
-        if (Input.GetAxisRaw("Horizontal") == 0 && Input.GetAxisRaw("Vertical") == 0)
-        {
-            RatAnimator.Instance.SetIsRunning(false);
-        }
-
-        movement.x = Input.GetAxisRaw("Horizontal");
-        movement.y = Input.GetAxisRaw("Vertical");
-
-        movement.Normalize();
-
-        rb.velocity = movement * activeMoveSpeed;
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (dashCoolCounter <= 0 && dashCounter <= 0)
+            if (Input.GetAxisRaw("Horizontal") == 0 && Input.GetAxisRaw("Vertical") == 0)
             {
-                activeMoveSpeed = dashSpeed;
-                dashCounter = dashLength;
-                isDashing = true;
+                RatAnimator.Instance.SetIsRunning(false);
             }
-        }
 
-        if (dashCounter > 0)
-        {
-            dashCounter -= Time.deltaTime;
+            movement.x = Input.GetAxisRaw("Horizontal");
+            movement.y = Input.GetAxisRaw("Vertical");
 
-            if (dashCounter <= 0) // dash is over
+            movement.Normalize();
+
+            rb.velocity = movement * activeMoveSpeed;
+
+            if (rb.velocity.x > 0 && !facingRight)
             {
-                activeMoveSpeed = moveSpeed;
-                dashCoolCounter = dashCooldown;
-                isDashing = false;
+                facingRight = !facingRight;
+                Vector3 theScale = this.transform.GetChild(0).localScale;
+                theScale.x *= -1;
+                this.transform.GetChild(0).localScale = theScale;
             }
-        }
+            else if (rb.velocity.x < 0 && facingRight)
+            {
+                facingRight = !facingRight;
+                Vector3 theScale = this.transform.GetChild(0).localScale;
+                theScale.x *= -1;
+                this.transform.GetChild(0).localScale = theScale;
+            }
 
-        if (dashCoolCounter > 0)
-        {
-            dashCoolCounter -= Time.deltaTime;
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                if (dashCoolCounter <= 0 && dashCounter <= 0)
+                {
+                    activeMoveSpeed = dashSpeed;
+                    dashCounter = dashLength;
+                    isDashing = true;
+                }
+            }
+
+            if (dashCounter > 0)
+            {
+                dashCounter -= Time.deltaTime;
+
+                if (dashCounter <= 0) // dash is over
+                {
+                    activeMoveSpeed = moveSpeed;
+                    dashCoolCounter = dashCooldown;
+                    isDashing = false;
+                }
+            }
+
+            if (dashCoolCounter > 0)
+            {
+                dashCoolCounter -= Time.deltaTime;
+            }
         }
     }
 
