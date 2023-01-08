@@ -13,6 +13,11 @@ public class ButtonScript : MonoBehaviour
     [SerializeField]
     GameObject objectToChange;
 
+    [SerializeField]
+    Sprite buttonON;
+    [SerializeField]
+    Sprite buttonOff;
+
     // Not active
     void onStart(){
         isActive = false;
@@ -26,7 +31,7 @@ public class ButtonScript : MonoBehaviour
         {
             Debug.Log("Is On!");
 
-            this.isActive = true;
+            this.setPressed(true);
 
             //Room check here
             //GameObject shadow = otherObj.gameObject.transform.get;
@@ -52,6 +57,17 @@ public class ButtonScript : MonoBehaviour
     public void setPressed(bool active)
     {
         this.isActive = active;
+
+        // Script the sprite back active == ON, not active == OFF
+        if (this.isActive)
+        {
+            this.GetComponent<SpriteRenderer>().sprite = buttonON;
+        }
+        else if (!this.isActive)
+        {
+            this.GetComponent<SpriteRenderer>().sprite = buttonOff;
+        }
+        
     }
 
 }
