@@ -34,9 +34,11 @@ public class MazeCreator : MonoBehaviour
     private List<GameObject> unityRows = new List<GameObject>(); //List of row GameObjects
     private List<GameObject> lasers = new List<GameObject>(); //List of laser GameObjects
 
+    private GameObject rat;
+
     void Start()
     {
-        GameObject rat = GameObject.FindGameObjectsWithTag("Player")[0];
+        rat = GameObject.FindGameObjectsWithTag("Player")[0];
         rat.transform.position = ratSpawnPosition;
 
         //Initialize MazeCreator
@@ -277,6 +279,7 @@ public class MazeCreator : MonoBehaviour
                             currentMazeCell.GetChild(1).gameObject.SetActive(true);
                             currentMazeCell.GetChild(1).gameObject.GetComponent<SpriteRenderer>().color = Color.red;
                             lasers.Add(currentMazeCell.GetChild(1).gameObject);
+                            currentMazeCell.GetChild(1).gameObject.AddComponent<MazeLaser>();
                         }
                     }
                     if (!ellersMaze[row, col].HasRightWall())
@@ -287,11 +290,12 @@ public class MazeCreator : MonoBehaviour
                             currentMazeCell.GetChild(0).gameObject.SetActive(true);
                             currentMazeCell.GetChild(0).gameObject.GetComponent<SpriteRenderer>().color = Color.red;
                             lasers.Add(currentMazeCell.GetChild(0).gameObject);
+                            currentMazeCell.GetChild(0).gameObject.AddComponent<MazeLaser>();
                         }
                     }
 
                     // 20% chance to change wall into a destructible wall
-                    if (ellersMaze[row, col].HasSouthWall() && col != numCols - 1)
+                    if (ellersMaze[row, col].HasSouthWall() && row < numRows - 1)
                     {
                         if (rnd.Next(0, 6) == 1)
                         {
@@ -299,7 +303,7 @@ public class MazeCreator : MonoBehaviour
                             currentMazeCell.GetChild(1).gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
                         }
                     }
-                    if (ellersMaze[row, col].HasRightWall() && row != numRows - 1)
+                    if (ellersMaze[row, col].HasRightWall() && col < numCols - 1)
                     {
                         if (rnd.Next(0, 6) == 1)
                         {
@@ -360,6 +364,11 @@ public class MazeCreator : MonoBehaviour
         int row = int.Parse(coords[0]);
         int col = int.Parse(coords[1]);
 
+        if (row == numRows - 1 && col == numCols - 1)
+        {
+            col = col - 1;
+        }
+
         Vector3 locationToSpawnWireboxAt = unityRows[row].transform.GetChild(col).position;
         Vector3 locationToSpawnVentAt = unityRows[numRows - 1].transform.GetChild(numCols - 1).position;
 
@@ -372,7 +381,6 @@ public class MazeCreator : MonoBehaviour
         mazeWirebox.transform.GetChild(0).GetComponent<InteractableWires>().SetObjectToChange(this.gameObject);
         mazeVent.transform.GetChild(0).GetComponent<DashableVent>().SetVentAsMazeVent();
         CurrentSceneManager.Instance.SetNextScene();
-        // TODO Spawn wire and associated functions
     }
 
     public void ApplyWireEffect()
@@ -381,6 +389,11 @@ public class MazeCreator : MonoBehaviour
         {
             laser.SetActive(false);
         }
+    }
+
+    public void ResetRat()
+    {
+        rat.transform.position = ratSpawnPosition;
     }
 
     private void PrintEllersMaze()
