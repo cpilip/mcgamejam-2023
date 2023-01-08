@@ -12,7 +12,8 @@ public class CurrentSceneManager : MonoBehaviour
 
     public int currentRoomIndex = 0;
     private List<string> roomSceneNames = new List<string>() {"Room1","Room2","Room3","Room4"};
-    private List<Vector3> roomSpawnLocations = new List<Vector3>() {new Vector3(-4.83f, 2.65f, -1f),
+    private List<Vector3> roomSpawnLocations = new List<Vector3>() {
+        new Vector3(6.21f, -3.76f, -1f),
         new Vector3(-4.36f, -1.8f, -1f),
         new Vector3(-2.373097f, 0.1857041f, -1f),
         new Vector3(-4.33f, 2.32f, -1f)};
