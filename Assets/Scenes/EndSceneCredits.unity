@@ -166,8 +166,9 @@ GameObject:
   - component: {fileID: 83524798}
   - component: {fileID: 83524797}
   - component: {fileID: 83524799}
+  - component: {fileID: 83524800}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Names
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -322,6 +323,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+--- !u!114 &83524800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 83524795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86691dad06537664aa22f38831ebf40e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &109819211
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1195,7 +1208,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1125282010
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1538,6 +1551,7 @@ GameObject:
   - component: {fileID: 1744624011}
   - component: {fileID: 1744624010}
   - component: {fileID: 1744624013}
+  - component: {fileID: 1744624014}
   m_Layer: 5
   m_Name: Exit Button
   m_TagString: Untagged
@@ -1680,6 +1694,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+--- !u!114 &1744624014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1744624008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f6d67114c346d1458c951b7bfb50a93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1813892949
 GameObject:
   m_ObjectHideFlags: 0
