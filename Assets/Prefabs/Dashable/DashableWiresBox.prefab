@@ -123,6 +123,7 @@ GameObject:
   - component: {fileID: 1041746462043647320}
   - component: {fileID: 1041746462043647322}
   - component: {fileID: 1573028434117255621}
+  - component: {fileID: 1839010307835860100}
   m_Layer: 0
   m_Name: DashableWiresBoxTrigger
   m_TagString: Dashable
@@ -183,3 +184,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1097bb71afc33714aa25d7d09bcfebd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1839010307835860100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1041746462043647319}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9e9eebfc68bd1a45a0e970ed20454c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectToChange: {fileID: 0}

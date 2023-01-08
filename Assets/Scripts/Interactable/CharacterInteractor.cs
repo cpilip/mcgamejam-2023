@@ -8,7 +8,7 @@ public class CharacterInteractor : MonoBehaviour
 
     void Awake()
     {
-        DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(gameObject.transform.parent);
         m_current = null;
     }
 
@@ -28,6 +28,7 @@ public class CharacterInteractor : MonoBehaviour
         {
             Debug.Log("Setting m_current");
             m_current = other.gameObject;
+
         }
     }
 
