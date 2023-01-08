@@ -81,4 +81,12 @@ public class CurrentSceneManager : MonoBehaviour
             player.transform.position = roomSpawnLocations[currentRoomIndex];
         }
     }
+
+    void Update()
+    {
+        if (Input.GetKey("escape")) 
+        {
+            Application.Quit();
+        }
+    }
 }

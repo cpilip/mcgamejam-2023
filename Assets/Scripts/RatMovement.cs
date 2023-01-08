@@ -28,6 +28,19 @@ public class RatMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
+        {
+            if (!RatAnimator.Instance.GetIsRunning())
+            {
+                RatAnimator.Instance.SetIsRunning(true);
+            }
+        }
+
+        if (Input.GetAxisRaw("Horizontal") == 0 && Input.GetAxisRaw("Vertical") == 0)
+        {
+            RatAnimator.Instance.SetIsRunning(false);
+        }
+
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
 

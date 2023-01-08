@@ -9,11 +9,17 @@ public class InteractableLabCoat : Interactable
 
     public bool keyCollected = false;
 
+    [SerializeField]
+    Sprite otherSprite;
+
     public override void InteractWith()
     {
         Debug.Log("key collected!");
         popUpKeyCollected.GetComponent<FadingEffect>().canFade = true;
         keyCollected = true;
+
+        GameObject coat = gameObject.transform.parent.gameObject;
+        coat.GetComponent<SpriteRenderer>().sprite = otherSprite;
 
     }
 
