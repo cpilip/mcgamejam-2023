@@ -11,7 +11,7 @@ public class RatMovement : MonoBehaviour
     private float activeMoveSpeed;
     public float dashSpeed;
 
-    public float dashLength = 0.5f;
+    public float dashLength = 0.2f;
     public float dashCooldown = 1f;
 
     private float dashCounter;
@@ -69,18 +69,4 @@ public class RatMovement : MonoBehaviour
             Debug.Log("Entered Vent");
         }
     }
-
-    void OnCollisionEnter2D(Collision2D other) {
-        if(isDashing)
-        {
-
-        }
-    }
-
-    // private void OnCollisionEnter2D(Collision2D other) {
-    //     if (other.tag == "Laser");
-    //     {
-    //         Scene
-    //     }
-    // }
 }
