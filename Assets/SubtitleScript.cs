@@ -10,16 +10,21 @@ public class SubtitleScript : MonoBehaviour
     public TextMeshProUGUI subtitles;
     [SerializeField] private Image subtitleBackground;
     private string fileName;
+    private bool running;
 
     void Start()
     {
-        DontDestroyOnLoad(gameObject);
         subtitles.enabled = false;
         subtitleBackground.enabled = false;
+        running = false;
     }
 
     public void displaySubtitles()
     {
+        if(running)
+        {
+            StopCoroutine("Subtitles");
+        }
         StartCoroutine("Subtitles");
     }
 
@@ -28,24 +33,25 @@ public class SubtitleScript : MonoBehaviour
     {
         subtitles.enabled = true;
         subtitleBackground.enabled = true;
+        running = true;
 
         string currentRoom = GameObject.Find("Lore Note").GetComponent<InteractableLore>().roomName;
         
         fileName = currentRoom+"Subtitles";
         
-        string[] linesArr = Resources.Load<TextAsset>(fileName).text.Split("\n"[0]);
+        string[] linesArr = Resources.Load<TextAsset>(fileName).text.Split("\n"[0]); // this line taken directly from the code of Christina's previous teammate
         
 
         foreach(string line in linesArr)
         {
             subtitles.text = line.Split('@')[0];
-            Debug.Log(subtitles.text);
             float subtitleDelay = float.Parse(line.Split('@')[1]);
             yield return new WaitForSeconds(subtitleDelay);
         }
 
         subtitles.enabled = false;
         subtitleBackground.enabled = false;
+        running = false;
 
     }
 }

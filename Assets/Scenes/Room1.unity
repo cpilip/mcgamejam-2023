@@ -6729,6 +6729,10 @@ PrefabInstance:
       propertyPath: m_RenderMode
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1193625131973029459, guid: cd0f43300e4e049f980e0c757dad5be4, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 1193625131973029486, guid: cd0f43300e4e049f980e0c757dad5be4, type: 3}
       propertyPath: m_Name
       value: Subtitles

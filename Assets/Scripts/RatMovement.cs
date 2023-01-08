@@ -35,15 +35,36 @@ public class RatMovement : MonoBehaviour
 
             if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
             {
+
                 if (!RatAnimator.Instance.GetIsRunning())
                 {
                     RatAnimator.Instance.SetIsRunning(true);
+                    FindObjectOfType<AudioManagerScript>().Play("Walk");
                 }
             }
 
-            if (Input.GetAxisRaw("Horizontal") == 0 && Input.GetAxisRaw("Vertical") == 0)
+
+        if (Input.GetAxisRaw("Horizontal") == 0 && Input.GetAxisRaw("Vertical") == 0)
+        {
+            RatAnimator.Instance.SetIsRunning(false);
+            FindObjectOfType<AudioManagerScript>().Stop("Walk");
+        }
+
+        movement.x = Input.GetAxisRaw("Horizontal");
+        movement.y = Input.GetAxisRaw("Vertical");
+
+        movement.Normalize();
+
+        rb.velocity = movement * activeMoveSpeed;
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (dashCoolCounter <= 0 && dashCounter <= 0)
             {
-                RatAnimator.Instance.SetIsRunning(false);
+                activeMoveSpeed = dashSpeed;
+                dashCounter = dashLength;
+                isDashing = true;
+                FindObjectOfType<AudioManagerScript>().Play("Dash");
             }
 
             movement.x = Input.GetAxisRaw("Horizontal");
@@ -95,6 +116,14 @@ public class RatMovement : MonoBehaviour
                 dashCoolCounter -= Time.deltaTime;
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.Y))
+        {
+            FindObjectOfType<RatAnimator>().TrySqueak();
+            int squeakInt = Random.Range(1,8);
+            string squeakNum = squeakInt.ToString();
+            FindObjectOfType<AudioManagerScript>().Play("Squeak"+squeakNum);
+        }
     }
 
     void OnTriggerEnter2D(Collider2D other) {
@@ -103,4 +132,3 @@ public class RatMovement : MonoBehaviour
             Debug.Log("Entered Vent");
         }
     }
-}
