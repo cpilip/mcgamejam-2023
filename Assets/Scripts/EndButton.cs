@@ -11,6 +11,8 @@ public class EndButton : MonoBehaviour
     [SerializeField] private GameObject static1;
     [SerializeField] private GameObject static2;
 
+[SerializeField] GameObject LoreObj;
+
     // Not active
     void onStart(){
         isActive = false;
@@ -21,11 +23,16 @@ public class EndButton : MonoBehaviour
 
         if (otherObj.gameObject.tag == "Player" && this.isActive)
         {
+
             RatAnimator.Instance.ResetInitialized();
 
             StartCoroutine(FadeInStatic());
 
             
+
+            // just interact with 
+            LoreObj.SendMessage("InteractWith");
+            SceneManager.LoadScene("EndSceneCredits");
         }
 
     }
@@ -96,6 +103,6 @@ public class EndButton : MonoBehaviour
 
     public void ActivateEndButton()
     {
-        isActive = true;
+        isActive = true; 
     }
 }
