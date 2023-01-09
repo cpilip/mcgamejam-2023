@@ -5,12 +5,12 @@ using TMPro;
 
 public class InteractableLore : Interactable
 {
-    private bool hasBeenPlayed;
+    //private bool hasBeenPlayed;
     [SerializeField] public string roomName;
 
     void Start()
     {
-        hasBeenPlayed = false;
+        //hasBeenPlayed = false;
     }
 
     public override void InteractWith()
