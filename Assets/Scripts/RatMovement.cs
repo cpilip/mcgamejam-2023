@@ -17,14 +17,17 @@ public class RatMovement : MonoBehaviour
     private float dashCounter;
     private float dashCoolCounter;
 
-    private Transform sideRatPrefabObject;
+    private Transform spritePrefabObject;
     private bool facingRight = true;
     public bool isDashing;
+    public bool isLocked = false;
 
     void Awake()
     {
-        // This script is on the Rat prefab > get the RatSprite's first Child, the SideRat prefab
-        sideRatPrefabObject = this.transform.Find("RatSprite").Find("SideRat");
+        // Turns out an animator component overrides any transform changes via script
+        // This script is on the Rat prefab > get the RatSprite, not the SideRat
+        spritePrefabObject = this.transform.Find("RatSprite");
+        Debug.Log(spritePrefabObject.gameObject.name);
     }
 
     void Start()
@@ -37,7 +40,7 @@ public class RatMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (RatAnimator.Instance.GetAnimatorInitialized())
+        if (RatAnimator.Instance.GetAnimatorInitialized() && !isLocked)
         {
             // Input coming in, set animator to running
             if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
@@ -45,7 +48,7 @@ public class RatMovement : MonoBehaviour
                 if (!RatAnimator.Instance.GetIsRunning())
                 {
                     RatAnimator.Instance.SetIsRunning(true);
-                    //FindObjectOfType<AudioManagerScript>().Play("Walk");
+                    FindObjectOfType<AudioManagerScript>().Play("Walk");
                 }
             }
 
@@ -53,7 +56,7 @@ public class RatMovement : MonoBehaviour
             if (Input.GetAxisRaw("Horizontal") == 0 && Input.GetAxisRaw("Vertical") == 0)
             {
                 RatAnimator.Instance.SetIsRunning(false);
-                //FindObjectOfType<AudioManagerScript>().Stop("Walk");
+                FindObjectOfType<AudioManagerScript>().Stop("Walk");
             }
 
             movement.x = Input.GetAxisRaw("Horizontal");
@@ -67,24 +70,23 @@ public class RatMovement : MonoBehaviour
             if (rb.velocity.x > 0 && !facingRight)
             {
                 facingRight = !facingRight;
-                
-                Vector3 rPosition = sideRatPrefabObject.localPosition;
-                Vector3 rScale = sideRatPrefabObject.localScale;
+                Vector3 rPosition = spritePrefabObject.localPosition;
+                Vector3 rScale = spritePrefabObject.localScale;
                 rPosition.x *= -1;
                 rScale.x *= -1;
-                sideRatPrefabObject.localPosition = rPosition;
-                sideRatPrefabObject.localScale = rScale;
+                spritePrefabObject.localPosition = rPosition;
+                spritePrefabObject.localScale = rScale;
             }
             // Moving left
             else if (rb.velocity.x < 0 && facingRight)
             {
                 facingRight = !facingRight;
-                Vector3 rPosition = sideRatPrefabObject.localPosition;
-                Vector3 rScale = sideRatPrefabObject.localScale;
+                Vector3 rPosition = spritePrefabObject.localPosition;
+                Vector3 rScale = spritePrefabObject.localScale;
                 rPosition.x *= -1;
                 rScale.x *= -1;
-                sideRatPrefabObject.localPosition = rPosition;
-                sideRatPrefabObject.localScale = rScale;
+                spritePrefabObject.localPosition = rPosition;
+                spritePrefabObject.localScale = rScale;
             }
 
             if (Input.GetKeyDown(KeyCode.Space))
@@ -94,7 +96,7 @@ public class RatMovement : MonoBehaviour
                     activeMoveSpeed = dashSpeed;
                     dashCounter = dashLength;
                     isDashing = true;
-                    //uFindObjectOfType<AudioManagerScript>().Play("Dash");
+                    FindObjectOfType<AudioManagerScript>().Play("Dash");
                 }
             }
 
@@ -118,11 +120,21 @@ public class RatMovement : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Y))
             {
                 FindObjectOfType<RatAnimator>().TrySqueak();
-                int squeakInt = Random.Range(1, 8);
-                string squeakNum = squeakInt.ToString();
-                // FindObjectOfType<AudioManagerScript>().Play("Squeak" + squeakNum);
+                StartCoroutine(LetAnimationPlay());
             }
         }
+        else
+        {
+            rb.velocity = Vector3.zero;
+        }
+    }
+
+    IEnumerator LetAnimationPlay()
+    {
+        yield return new WaitForSeconds(0.8f);
+        int squeakInt = Random.Range(1, 8);
+        string squeakNum = squeakInt.ToString();
+        FindObjectOfType<AudioManagerScript>().Play("Squeak" + squeakNum);
     }
 
     void OnTriggerEnter2D(Collider2D other)

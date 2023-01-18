@@ -19,6 +19,7 @@ public class CurrentSceneManager : MonoBehaviour
         new Vector3(-4.33f, 2.32f, -1f)};
 
     [SerializeField] private GameObject player;
+    [SerializeField] public AudioManagerScript audioManagerScript;
     void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;

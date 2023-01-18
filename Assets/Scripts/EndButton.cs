@@ -22,6 +22,7 @@ public class EndButton : MonoBehaviour
 
         if (otherObj.gameObject.tag == "Player" && this.isActive)
         {
+            otherObj.gameObject.GetComponent<RatMovement>().isLocked = true;
             StartCoroutine(FadeInStatic());
 
             // just interact with 

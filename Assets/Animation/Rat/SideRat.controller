@@ -363,7 +363,7 @@ AnimatorState:
 --- !u!1102 &-2997260665793547536
 AnimatorState:
   serializedVersion: 6
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -483,7 +483,7 @@ AnimatorController:
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
-    m_DefaultBool: 1
+    m_DefaultBool: 0
     m_Controller: {fileID: 0}
   - m_Name: Transform
     m_Type: 9
@@ -521,9 +521,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25000012
+  m_TransitionDuration: 0.24950263
   m_TransitionOffset: 0
-  m_ExitTime: 0
+  m_ExitTime: 5.414326e-10
   m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -596,9 +596,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25000012
+  m_TransitionDuration: 0.25829202
   m_TransitionOffset: 0
-  m_ExitTime: 0
+  m_ExitTime: 2.707169e-10
   m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -674,8 +674,8 @@ AnimatorStateTransition:
   m_IsExit: 0
   serializedVersion: 3
   m_TransitionDuration: 0.25000015
-  m_TransitionOffset: 0.006270456
-  m_ExitTime: 0.0062704654
+  m_TransitionOffset: 0
+  m_ExitTime: 0.006270465
   m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
