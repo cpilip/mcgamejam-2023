@@ -92,6 +92,12 @@ public class CurrentSceneManager : MonoBehaviour
         }
     }
 
+    public void HideUI()
+    {
+        cheeseAmountText.transform.parent.parent.gameObject.SetActive(false);
+        player.SetActive(false);
+    }
+
     public void ResetRat()
     {
         player.transform.position = roomSpawnLocations[currentRoomIndex];
