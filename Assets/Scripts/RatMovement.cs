@@ -17,33 +17,43 @@ public class RatMovement : MonoBehaviour
     private float dashCounter;
     private float dashCoolCounter;
 
-    public bool isDashing;
+    private Transform sideRatPrefabObject;
     private bool facingRight = true;
+    public bool isDashing;
 
-    void Start() {
+    void Awake()
+    {
+        // This script is on the Rat prefab > get the RatSprite's first Child, the SideRat prefab
+        sideRatPrefabObject = this.transform.Find("RatSprite").Find("SideRat");
+    }
+
+    void Start()
+    {
         activeMoveSpeed = moveSpeed;
         rb = this.GetComponent<Rigidbody2D>();
         rb.freezeRotation = true;
     }
-    
+
     // Update is called once per frame
     void Update()
     {
-        if (RatAnimator.Instance.GetInitialized())
+        if (RatAnimator.Instance.GetAnimatorInitialized())
         {
-
-
+            // Input coming in, set animator to running
             if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
             {
                 if (!RatAnimator.Instance.GetIsRunning())
                 {
                     RatAnimator.Instance.SetIsRunning(true);
+                    //FindObjectOfType<AudioManagerScript>().Play("Walk");
                 }
             }
 
+            // No input, so stop running
             if (Input.GetAxisRaw("Horizontal") == 0 && Input.GetAxisRaw("Vertical") == 0)
             {
                 RatAnimator.Instance.SetIsRunning(false);
+                //FindObjectOfType<AudioManagerScript>().Stop("Walk");
             }
 
             movement.x = Input.GetAxisRaw("Horizontal");
@@ -53,19 +63,28 @@ public class RatMovement : MonoBehaviour
 
             rb.velocity = movement * activeMoveSpeed;
 
+            // Moving right
             if (rb.velocity.x > 0 && !facingRight)
             {
                 facingRight = !facingRight;
-                Vector3 theScale = this.transform.GetChild(0).localScale;
-                theScale.x *= -1;
-                this.transform.GetChild(0).localScale = theScale;
+                
+                Vector3 rPosition = sideRatPrefabObject.localPosition;
+                Vector3 rScale = sideRatPrefabObject.localScale;
+                rPosition.x *= -1;
+                rScale.x *= -1;
+                sideRatPrefabObject.localPosition = rPosition;
+                sideRatPrefabObject.localScale = rScale;
             }
+            // Moving left
             else if (rb.velocity.x < 0 && facingRight)
             {
                 facingRight = !facingRight;
-                Vector3 theScale = this.transform.GetChild(0).localScale;
-                theScale.x *= -1;
-                this.transform.GetChild(0).localScale = theScale;
+                Vector3 rPosition = sideRatPrefabObject.localPosition;
+                Vector3 rScale = sideRatPrefabObject.localScale;
+                rPosition.x *= -1;
+                rScale.x *= -1;
+                sideRatPrefabObject.localPosition = rPosition;
+                sideRatPrefabObject.localScale = rScale;
             }
 
             if (Input.GetKeyDown(KeyCode.Space))
@@ -75,6 +94,7 @@ public class RatMovement : MonoBehaviour
                     activeMoveSpeed = dashSpeed;
                     dashCounter = dashLength;
                     isDashing = true;
+                    //uFindObjectOfType<AudioManagerScript>().Play("Dash");
                 }
             }
 
@@ -94,13 +114,31 @@ public class RatMovement : MonoBehaviour
             {
                 dashCoolCounter -= Time.deltaTime;
             }
+
+            if (Input.GetKeyDown(KeyCode.Y))
+            {
+                FindObjectOfType<RatAnimator>().TrySqueak();
+                int squeakInt = Random.Range(1, 8);
+                string squeakNum = squeakInt.ToString();
+                // FindObjectOfType<AudioManagerScript>().Play("Squeak" + squeakNum);
+            }
         }
     }
 
-    void OnTriggerEnter2D(Collider2D other) {
+    void OnTriggerEnter2D(Collider2D other)
+    {
         if (other.tag == "Vent")
         {
+
             Debug.Log("Entered Vent");
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        if (isDashing)
+        {
+
         }
     }
 }

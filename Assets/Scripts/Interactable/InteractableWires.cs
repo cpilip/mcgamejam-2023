@@ -20,7 +20,17 @@ public class InteractableWires : Interactable
         }
 
         GameObject wiresBox = gameObject.transform.parent.gameObject;
-        wiresBox.GetComponent<SpriteRenderer>().sprite = chewedSprite;
+
+        if (wiresBox.GetComponent<WiresBoxVisuals>()) {
+            wiresBox.GetComponent<WiresBoxVisuals>().nextSprite();
+        } else {
+            wiresBox.GetComponent<SpriteRenderer>().sprite = chewedSprite;
+        }
+
+        // if (chewedSprite)
+        // {
+        //     wiresBox.GetComponent<SpriteRenderer>().sprite = chewedSprite;
+        // }
     }
 
     public void SetObjectToChange(GameObject obj)

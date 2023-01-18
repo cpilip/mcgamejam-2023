@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class FadingEffect : MonoBehaviour
 {
@@ -12,17 +13,30 @@ public class FadingEffect : MonoBehaviour
     
     private bool fadeInCompleted;
 
-    public Component[] objectRenderers;
+    [SerializeField]
+    TextMeshProUGUI text;
 
-    [SerializeField] TextMeshProUGUI text;
+    
+    [SerializeField]
+    Image panel;
+
+    [SerializeField]
+    Image key;
 
     public void Start()
     {
         canFade = false;
-        fadeInSpead = 0.005f;
-        fadeOutSpead = 0.1f;
-        counterDown = 5f;
+        fadeInSpead = 0.01f;
+        fadeOutSpead = 0.01f;
+        counterDown = 4f;
         fadeInCompleted = false;
+
+        Color objectColor = text.color;
+        objectColor = new Color(objectColor.r, objectColor.g, objectColor.b, 0);
+        text.color = objectColor;
+        panel.GetComponent<CanvasRenderer>().SetAlpha(0f);
+        key.GetComponent<CanvasRenderer>().SetAlpha(0f);
+        
     }
     public void Update()
     {
@@ -31,7 +45,7 @@ public class FadingEffect : MonoBehaviour
             StartCoroutine(FadeIn());
         }
 
-        if (fadeInCompleted)
+        else if (fadeInCompleted)
         {
             counterDown -= Time.deltaTime;
 
@@ -44,51 +58,42 @@ public class FadingEffect : MonoBehaviour
 
     public IEnumerator FadeIn()
     {
-        objectRenderers = this.GetComponentsInChildren<SpriteRenderer>();
-        
-        foreach (SpriteRenderer render in objectRenderers) {
-            Debug.Log(render.color.a);
-            while (render.color.a < 1)
-            {
-                Color objectColor = render.color;
-                float fadeAmount = objectColor.a + (fadeInSpead * Time.deltaTime);
-                objectColor = new Color(objectColor.r, objectColor.g, objectColor.b, fadeAmount);
-                render.color = objectColor;
-                yield return null;
-            }
-        }
+        panel.CrossFadeAlpha(1f,0.2f,false);
+
         while (text.color.a < 1)
-        {
+        {   
+            if (key.GetComponent<CanvasRenderer>().GetAlpha() != 1f)
+            {
+                key.CrossFadeAlpha(1f,1f,false);
+            }
             Color objectColor = text.color;
             float fadeAmount = objectColor.a + (fadeInSpead * Time.deltaTime);
             objectColor = new Color(objectColor.r, objectColor.g, objectColor.b, fadeAmount);
             text.color = objectColor;
+
             yield return null;
         }
         
         canFade = false;
         fadeInCompleted = true;
     }
+    
     public IEnumerator FadeOut()
     {
-        SpriteRenderer object1 = this.transform.GetChild(0).GetComponent<SpriteRenderer>();
-        SpriteRenderer object2 = this.transform.GetChild(1).GetComponent<SpriteRenderer>();
-    
+        key.CrossFadeAlpha(0f,0.8f,false);
         while (text.color.a > 0)
         {
-            object1.color = getNextColor(object1.color);
-            object2.color = getNextColor(object1.color);
-            text.color = getNextColor(text.color);
+            Color objectColor = text.color;
+            float fadeAmount = objectColor.a - (fadeOutSpead * Time.deltaTime);
+            objectColor = new Color(objectColor.r, objectColor.g, objectColor.b, fadeAmount);
+            text.color = objectColor;
+
             yield return null;
         }
-        
-        canFade = false;
-    }
 
-    public Color getNextColor(Color color) {
-        Color objectColor = color;
-        float fadeAmount = objectColor.a - (fadeOutSpead * Time.deltaTime);
-        objectColor = new Color(objectColor.r, objectColor.g, objectColor.b, fadeAmount);
-        return objectColor;
+        panel.CrossFadeAlpha(0f,1f,false);
+
+        canFade = false;
+        fadeInCompleted = false;
     }
 }

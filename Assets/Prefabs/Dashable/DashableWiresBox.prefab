@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1041746461930280469}
   - component: {fileID: 1041746461930280471}
   - component: {fileID: 1751673560881109819}
+  - component: {fileID: 5788517773637828961}
   m_Layer: 0
   m_Name: DashableWiresBox
   m_TagString: Untagged
@@ -27,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 1041746461930280468}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -1}
-  m_LocalScale: {x: 0.5, y: 1.5, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1041746462043647320}
@@ -75,8 +76,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.2924528, g: 0.2924528, b: 0.2924528, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 1b12f49b9ff52034a83764fbc5225cc6, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -99,7 +100,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.34606746, y: -0.030312493}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -110,8 +111,22 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.30786508, y: 0.8686459}
   m_EdgeRadius: 0
+--- !u!114 &5788517773637828961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1041746461930280468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4f38696d08d4954e82e767a0096d392, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  openedSprite: {fileID: 21300000, guid: f71d0c0cc298f24409c31db117513d85, type: 3}
+  chewedSprite: {fileID: 21300000, guid: 3e089c5868d710946b8acfa3951da774, type: 3}
 --- !u!1 &1041746462043647319
 GameObject:
   m_ObjectHideFlags: 0
@@ -139,8 +154,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1041746462043647319}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 1, z: 1}
+  m_LocalPosition: {x: 0.324, y: 0, z: 0}
+  m_LocalScale: {x: 1.5, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1041746461930280469}
@@ -170,7 +185,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2, y: 1.25}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
 --- !u!114 &1573028434117255621
 MonoBehaviour:
@@ -197,3 +212,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectToChange: {fileID: 0}
+  chewedSprite: {fileID: 0}
