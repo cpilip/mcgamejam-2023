@@ -8,7 +8,7 @@ public class RatAnimator : MonoBehaviour
 
     public static RatAnimator Instance { get { return _instance; } }
 
-    private bool initialized = false;
+    private bool animatorInitialized = false;
     [SerializeField] private Animator anim;
 
     private void Awake()
@@ -52,22 +52,22 @@ public class RatAnimator : MonoBehaviour
     {
         anim.SetTrigger("Wakeup");
         yield return new WaitForSeconds(1.5f);
-        initialized = true;
+        animatorInitialized = true;
     }
 
-    public bool GetInitialized()
+    public bool GetAnimatorInitialized()
     {
-        return initialized;
+        return animatorInitialized;
     }
 
-    public void ResetInitialized()
+    public void UninitializeAnimator()
     {
-        initialized = false;
+        animatorInitialized = false;
     }
 
     public void Update()
     {
-        if (Input.anyKey && initialized == false)
+        if (Input.anyKey && animatorInitialized == false)
         {
             StartCoroutine(TryWakeup());
         }

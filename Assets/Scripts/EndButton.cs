@@ -10,8 +10,7 @@ public class EndButton : MonoBehaviour
     [SerializeField] private GameObject blackOut;
     [SerializeField] private GameObject static1;
     [SerializeField] private GameObject static2;
-
-[SerializeField] GameObject LoreObj;
+    [SerializeField] GameObject LoreObj;
 
     // Not active
     void onStart(){
@@ -23,12 +22,7 @@ public class EndButton : MonoBehaviour
 
         if (otherObj.gameObject.tag == "Player" && this.isActive)
         {
-
-            RatAnimator.Instance.ResetInitialized();
-
             StartCoroutine(FadeInStatic());
-
-            
 
             // just interact with 
             LoreObj.SendMessage("InteractWith");
@@ -69,36 +63,6 @@ public class EndButton : MonoBehaviour
         }
 
         SceneManager.LoadScene("EndSceneCredits");
-    }
-
-    IEnumerator FadeOutBlackSquare(bool fadeToBlack = true, int fadeSpeed = 5)
-    {
-        Color objectColor = blackOut.GetComponent<Image>().color;
-        float fadeAmount;
-
-        if (fadeToBlack)
-        {
-            while (blackOut.GetComponent<Image>().color.a < 1)
-            {
-                fadeAmount = objectColor.a + (fadeSpeed * Time.deltaTime);
-
-                objectColor = new Color(objectColor.r, objectColor.g, objectColor.b, fadeAmount);
-                blackOut.GetComponent<Image>().color = objectColor;
-                yield return null;
-            }
-            
-        }
-        else
-        {
-            while (blackOut.GetComponent<Image>().color.a > 0)
-            {
-                fadeAmount = objectColor.a - (fadeSpeed * Time.deltaTime);
-
-                objectColor = new Color(objectColor.r, objectColor.g, objectColor.b, fadeAmount);
-                blackOut.GetComponent<Image>().color = objectColor;
-                yield return null;
-            }
-        }
     }
 
     public void ActivateEndButton()

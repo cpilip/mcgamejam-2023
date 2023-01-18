@@ -17,8 +17,15 @@ public class RatMovement : MonoBehaviour
     private float dashCounter;
     private float dashCoolCounter;
 
+    private Transform sideRatPrefabObject;
     private bool facingRight = true;
     public bool isDashing;
+
+    void Awake()
+    {
+        // This script is on the Rat prefab > get the RatSprite's first Child, the SideRat prefab
+        sideRatPrefabObject = this.transform.Find("RatSprite").Find("SideRat");
+    }
 
     void Start()
     {
@@ -30,8 +37,9 @@ public class RatMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (RatAnimator.Instance.GetInitialized())
+        if (RatAnimator.Instance.GetAnimatorInitialized())
         {
+            // Input coming in, set animator to running
             if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
             {
                 if (!RatAnimator.Instance.GetIsRunning())
@@ -41,6 +49,7 @@ public class RatMovement : MonoBehaviour
                 }
             }
 
+            // No input, so stop running
             if (Input.GetAxisRaw("Horizontal") == 0 && Input.GetAxisRaw("Vertical") == 0)
             {
                 RatAnimator.Instance.SetIsRunning(false);
@@ -54,19 +63,28 @@ public class RatMovement : MonoBehaviour
 
             rb.velocity = movement * activeMoveSpeed;
 
+            // Moving right
             if (rb.velocity.x > 0 && !facingRight)
             {
                 facingRight = !facingRight;
-                Vector3 theScale = this.transform.GetChild(0).localScale;
-                theScale.x *= -1;
-                this.transform.GetChild(0).localScale = theScale;
+                
+                Vector3 rPosition = sideRatPrefabObject.localPosition;
+                Vector3 rScale = sideRatPrefabObject.localScale;
+                rPosition.x *= -1;
+                rScale.x *= -1;
+                sideRatPrefabObject.localPosition = rPosition;
+                sideRatPrefabObject.localScale = rScale;
             }
+            // Moving left
             else if (rb.velocity.x < 0 && facingRight)
             {
                 facingRight = !facingRight;
-                Vector3 theScale = this.transform.GetChild(0).localScale;
-                theScale.x *= -1;
-                this.transform.GetChild(0).localScale = theScale;
+                Vector3 rPosition = sideRatPrefabObject.localPosition;
+                Vector3 rScale = sideRatPrefabObject.localScale;
+                rPosition.x *= -1;
+                rScale.x *= -1;
+                sideRatPrefabObject.localPosition = rPosition;
+                sideRatPrefabObject.localScale = rScale;
             }
 
             if (Input.GetKeyDown(KeyCode.Space))
@@ -77,9 +95,9 @@ public class RatMovement : MonoBehaviour
                     dashCounter = dashLength;
                     isDashing = true;
                     //uFindObjectOfType<AudioManagerScript>().Play("Dash");
-
                 }
             }
+
             if (dashCounter > 0)
             {
                 dashCounter -= Time.deltaTime;
@@ -123,11 +141,4 @@ public class RatMovement : MonoBehaviour
 
         }
     }
-
-    // private void OnCollisionEnter2D(Collision2D other) {
-    //     if (other.tag == "Laser");
-    //     {
-    //         Scene
-    //     }
-    // }
 }
