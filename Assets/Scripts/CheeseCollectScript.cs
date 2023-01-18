@@ -14,6 +14,7 @@ public class CheeseCollectScript : MonoBehaviour
             player = otherObj.gameObject;
             // Destroy the cheese
             RatAnimator.Instance.TryNibble();
+            CurrentSceneManager.Instance.CollectCheese();
             StartCoroutine(LetAnimationPlay());
         }
 

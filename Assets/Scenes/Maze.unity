@@ -6688,6 +6688,8 @@ MonoBehaviour:
   laserTriggerPrefabS: {fileID: 622543610835070657, guid: 83bd7fa9d61559741a2da63b71e870a2, type: 3}
   laserRightSprite: {fileID: 21300000, guid: 120ae8872457e3a41a399e7083e256ad, type: 3}
   laserSouthSprite: {fileID: 21300000, guid: 4699d45b9b8200a4584930001f9e0d18, type: 3}
+  laserOffRightSprite: {fileID: 21300000, guid: 01d32d3bf8bb27a4b803488329c832b7, type: 3}
+  laserOffSouthSprite: {fileID: 21300000, guid: f05817baaf539a24fad2a2f0537bb6d0, type: 3}
   wallCrackedSprite: {fileID: 21300000, guid: c194bdcda7db1d949a8dbf1ed21798e4, type: 3}
   dynamic: {fileID: 2089394265}
   unityRowPosition: {x: 0, y: 0, z: 0}

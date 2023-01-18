@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -14,12 +15,13 @@ public class CurrentSceneManager : MonoBehaviour
     private List<string> roomSceneNames = new List<string>() {"Room1","Room2","Room3","Room4"};
     private List<Vector3> roomSpawnLocations = new List<Vector3>() {
         new Vector3(6.21f, -3.76f, -1f),
-        new Vector3(-4.36f, -1.8f, -1f),
-        new Vector3(-1.28f, 4.80f, -1f),
-        new Vector3(-4.33f, 2.32f, -1f)};
+        new Vector3(-5.5f, -1.8f, -1f),
+        new Vector3(-5.5f, 3.25f, -1f),
+        new Vector3(-5.5f, -0.3f, -1f)};
+    private int numCheese = 0;
+    private TextMeshProUGUI cheeseAmountText;
 
     [SerializeField] private GameObject player;
-    [SerializeField] public AudioManagerScript audioManagerScript;
     void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -28,6 +30,12 @@ public class CurrentSceneManager : MonoBehaviour
     void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
+    }
+
+    public void CollectCheese()
+    {
+        numCheese++;
+        cheeseAmountText.text = numCheese + "";
     }
 
     void Start()
@@ -70,6 +78,7 @@ public class CurrentSceneManager : MonoBehaviour
         if (scene.name == "Room1")
         {
             player = GameObject.FindGameObjectsWithTag("Player")[0];
+            cheeseAmountText = GameObject.FindGameObjectsWithTag("UI_Cheese")[0].transform.Find("CheeseText").GetComponent<TextMeshProUGUI>();
         }
 
         if (scene.name == "Room4")
@@ -81,6 +90,12 @@ public class CurrentSceneManager : MonoBehaviour
         {
             player.transform.position = roomSpawnLocations[currentRoomIndex];
         }
+    }
+
+    public void ResetRat()
+    {
+        player.transform.position = roomSpawnLocations[currentRoomIndex];
+        FindObjectOfType<AudioManagerScript>().Play("Laser");
     }
 
     void Update()

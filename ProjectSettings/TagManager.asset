@@ -9,6 +9,7 @@ TagManager:
   - Deadly
   - PopUp
   - AudioManager
+  - UI_Cheese
   layers:
   - Default
   - TransparentFX
