@@ -20,6 +20,9 @@ public class CurrentSceneManager : MonoBehaviour
         new Vector3(-5.5f, -0.3f, -1f)};
     private int numCheese = 0;
     private TextMeshProUGUI cheeseAmountText;
+  
+    private bool camEffects = true;
+    private bool camOverlay = true;
 
     [SerializeField] private GameObject player;
     void OnEnable()
@@ -98,6 +101,26 @@ public class CurrentSceneManager : MonoBehaviour
         player.SetActive(false);
     }
 
+    public void CheckCamEffects()
+    {
+        Camera.main.GetComponent<CRTPostEffecter>().enabled = camEffects;
+    }
+
+    public void CheckCamOverlay()
+    {
+        GameObject.FindGameObjectWithTag("UI_CCTV").SetActive(camOverlay);
+    }
+
+    public void ToggleCamEffects()
+    {
+        camEffects = !camEffects;
+    }
+
+    public void ToggleCamOverlay()
+    {
+        camOverlay = !camOverlay;
+    }
+
     public void ResetRat()
     {
         player.transform.position = roomSpawnLocations[currentRoomIndex];
@@ -109,6 +132,20 @@ public class CurrentSceneManager : MonoBehaviour
         if (Input.GetKey("escape")) 
         {
             Application.Quit();
+        }
+
+        if (SceneManager.GetActiveScene().name != "TitlePage")
+        {
+            if (Input.GetKey(KeyCode.I))
+            {
+                ToggleCamEffects();
+                CheckCamEffects();
+            }
+            if (Input.GetKey(KeyCode.O))
+            {
+                ToggleCamOverlay();
+                CheckCamOverlay();
+            }
         }
     }
 }
