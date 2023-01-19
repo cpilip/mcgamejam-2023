@@ -615,7 +615,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 4b8367b63337eb14ab974ed131bea988, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1691,6 +1691,10 @@ PrefabInstance:
     - target: {fileID: 1542655347355557865, guid: e3ef6a341a824d94687b536277f8555a, type: 3}
       propertyPath: m_Color.a
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1542655347355557865, guid: e3ef6a341a824d94687b536277f8555a, type: 3}
+      propertyPath: m_SortingOrder
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8633640483771353946, guid: e3ef6a341a824d94687b536277f8555a, type: 3}
       propertyPath: chewedSprite
