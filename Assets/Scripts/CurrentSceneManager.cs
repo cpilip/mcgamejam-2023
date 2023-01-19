@@ -20,9 +20,10 @@ public class CurrentSceneManager : MonoBehaviour
         new Vector3(-5.5f, -0.3f, -1f)};
     private int numCheese = 0;
     private TextMeshProUGUI cheeseAmountText;
-  
-    private bool camEffects = true;
-    private bool camOverlay = true;
+
+    [SerializeField] private bool camEffects = true;
+    [SerializeField] private bool camOverlay = true;
+    private GameObject camOverlayObject;
 
     [SerializeField] private GameObject player;
     void OnEnable()
@@ -81,7 +82,10 @@ public class CurrentSceneManager : MonoBehaviour
         if (scene.name == "Room1")
         {
             player = GameObject.FindGameObjectsWithTag("Player")[0];
+            camOverlayObject = GameObject.FindGameObjectWithTag("UI_CCTV");
             cheeseAmountText = GameObject.FindGameObjectsWithTag("UI_Cheese")[0].transform.Find("CheeseText").GetComponent<TextMeshProUGUI>();
+            CheckCamEffects();
+            CheckCamOverlay();
         }
 
         if (scene.name == "Room4")
@@ -108,7 +112,7 @@ public class CurrentSceneManager : MonoBehaviour
 
     public void CheckCamOverlay()
     {
-        GameObject.FindGameObjectWithTag("UI_CCTV").SetActive(camOverlay);
+        camOverlayObject.SetActive(camOverlay);
     }
 
     public void ToggleCamEffects()
@@ -136,12 +140,13 @@ public class CurrentSceneManager : MonoBehaviour
 
         if (SceneManager.GetActiveScene().name != "TitlePage")
         {
-            if (Input.GetKey(KeyCode.I))
+            if (Input.GetKeyDown(KeyCode.I))
             {
                 ToggleCamEffects();
                 CheckCamEffects();
+
             }
-            if (Input.GetKey(KeyCode.O))
+            if (Input.GetKeyDown(KeyCode.O))
             {
                 ToggleCamOverlay();
                 CheckCamOverlay();

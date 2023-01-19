@@ -495,9 +495,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 223224498}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -263.1, y: -124.9, z: 0}
-  m_LocalScale: {x: 219.04001, y: 219.04001, z: 219.04001}
-  m_ConstrainProportionsScale: 1
+  m_LocalPosition: {x: -260.7, y: -123.7, z: 0}
+  m_LocalScale: {x: 244.2, y: 217.08, z: 217.08}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 390928138}
   m_RootOrder: 8
@@ -542,7 +542,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 143af8fa8103ce54b9db97b4cd122172, type: 3}
   m_Color: {r: 0.640753, g: 0.68793535, b: 0.7264151, a: 1}
   m_FlipX: 0
@@ -968,7 +968,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 119.70001, y: 93.23001}
+  m_AnchoredPosition: {x: 112.70001, y: 93.23001}
   m_SizeDelta: {x: 200, y: 17}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &387172338
@@ -991,7 +991,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Camera Effects
+  m_text: Camera Overlay
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 689826f8e5a0b4494b9cbe01af43580f, type: 2}
   m_sharedMaterial: {fileID: -7365914301882659139, guid: 689826f8e5a0b4494b9cbe01af43580f, type: 2}
@@ -1622,7 +1622,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 241.5, y: 92.7}
+  m_AnchoredPosition: {x: 234.6, y: 92.7}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1107767260
@@ -1671,7 +1671,19 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1839271146}
+        m_TargetAssemblyTypeName: CurrentSceneManager, Assembly-CSharp
+        m_MethodName: ToggleCamOverlay
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 1
 --- !u!1 &1351808024
 GameObject:
@@ -1731,7 +1743,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: O to toggle
+  m_text: I, O to toggle
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 689826f8e5a0b4494b9cbe01af43580f, type: 2}
   m_sharedMaterial: {fileID: -7365914301882659139, guid: 689826f8e5a0b4494b9cbe01af43580f, type: 2}
@@ -1948,7 +1960,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: cb7c52e14ca31c7409e1699197c63210, type: 3}
   m_Color: {r: 0.640753, g: 0.68793535, b: 0.7264151, a: 1}
   m_FlipX: 0
@@ -2374,7 +2386,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 241.5, y: 112}
+  m_AnchoredPosition: {x: 234.6, y: 112}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1821461577
@@ -2424,13 +2436,13 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11500000, guid: da0d1d65e66ced940931ff76793fa92e, type: 3}
-        m_TargetAssemblyTypeName: UnityEditor.MonoScript, UnityEditor.CoreModule
-        m_MethodName: 
+      - m_Target: {fileID: 1839271146}
+        m_TargetAssemblyTypeName: CurrentSceneManager, Assembly-CSharp
+        m_MethodName: ToggleCamEffects
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -2467,6 +2479,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentRoomIndex: 0
+  camEffects: 1
+  camOverlay: 1
   player: {fileID: 0}
 --- !u!4 &1839271147
 Transform:
@@ -2806,7 +2820,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 119.70001, y: 111.8}
+  m_AnchoredPosition: {x: 112.70001, y: 111.8}
   m_SizeDelta: {x: 200, y: 17}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2134344439
@@ -2829,7 +2843,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Camera Overlay
+  m_text: Camera Effects
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 689826f8e5a0b4494b9cbe01af43580f, type: 2}
   m_sharedMaterial: {fileID: -7365914301882659139, guid: 689826f8e5a0b4494b9cbe01af43580f, type: 2}

@@ -1088,7 +1088,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 20
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &405680278
 GameObject:
@@ -3386,7 +3386,7 @@ GameObject:
   - component: {fileID: 1115637745}
   m_Layer: 5
   m_Name: CCTV_Overlay
-  m_TagString: Untagged
+  m_TagString: UI_CCTV
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3424,7 +3424,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.09803922}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.1764706}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3656,7 +3656,7 @@ RectTransform:
   - {fileID: 26073418}
   - {fileID: 1115637744}
   m_Father: {fileID: 0}
-  m_RootOrder: 21
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -7132,7 +7132,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1193625131973029458, guid: cd0f43300e4e049f980e0c757dad5be4, type: 3}
       propertyPath: m_RootOrder
-      value: 19
+      value: 21
       objectReference: {fileID: 0}
     - target: {fileID: 1193625131973029458, guid: cd0f43300e4e049f980e0c757dad5be4, type: 3}
       propertyPath: m_AnchorMax.x
@@ -7212,7 +7212,7 @@ PrefabInstance:
       objectReference: {fileID: 1660622919}
     - target: {fileID: 1193625131973029459, guid: cd0f43300e4e049f980e0c757dad5be4, type: 3}
       propertyPath: m_RenderMode
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1193625131973029459, guid: cd0f43300e4e049f980e0c757dad5be4, type: 3}
       propertyPath: m_SortingOrder
