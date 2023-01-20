@@ -13,6 +13,7 @@ public class LaserDoor : MonoBehaviour
         this.GetComponent<SpriteRenderer>().sprite = laserDoorOffSprite;
 
         this.GetComponent<BoxCollider2D>().enabled = false;
+        FindObjectOfType<AudioManagerScript>().Play("ButtonPress");
     }
 
     void OnTriggerEnter2D(Collider2D obj)
@@ -20,7 +21,7 @@ public class LaserDoor : MonoBehaviour
         if (obj.gameObject.tag == "Player")
         {
             //Debug.Log("maze: player dead");
-            MazeCreator.Instance.ResetRat();
+            CurrentSceneManager.Instance.ResetRat();
             // dies
         }
     }

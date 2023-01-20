@@ -8,6 +8,9 @@ TagManager:
   - Interactable
   - Deadly
   - PopUp
+  - AudioManager
+  - UI_Cheese
+  - UI_CCTV
   layers:
   - Default
   - TransparentFX

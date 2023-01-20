@@ -93,3 +93,75 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  - name: Nibble
+    clip: {fileID: 8300000, guid: 18adaf2c84c0c4dbc8d2370f44c46e93, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Dash
+    clip: {fileID: 8300000, guid: 2daed140eb98e415f88e564515f90ad2, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Squeak1
+    clip: {fileID: 8300000, guid: 3863167bb15c044628b3959cf21612b4, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Squeak2
+    clip: {fileID: 8300000, guid: e826786f0475d42669c7b93795dd3854, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Squeak3
+    clip: {fileID: 8300000, guid: 36b48fc746ee04e7599a82fc4c9afc88, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Squeak4
+    clip: {fileID: 8300000, guid: f36d3323002fd41d9ad45d0c5b6f4060, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Squeak5
+    clip: {fileID: 8300000, guid: 17178b60850bc4eff955bf069eba144d, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Squeak6
+    clip: {fileID: 8300000, guid: bfc97d8b898ed4130852c715450f719d, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Squeak7
+    clip: {fileID: 8300000, guid: 28dc7d594fd1d455c9fece8b2c24d8c3, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Walk
+    clip: {fileID: 8300000, guid: 6d264fb93a4674698ad78be6d45a4fb8, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: ButtonPress
+    clip: {fileID: 8300000, guid: 88d6d4894678947a19c205d2f8ccc7cb, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Laser
+    clip: {fileID: 8300000, guid: c0da11b352d776a418abccb2774c3ce1, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}

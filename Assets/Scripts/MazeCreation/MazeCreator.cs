@@ -32,6 +32,8 @@ public class MazeCreator : MonoBehaviour
     [SerializeField] private GameObject laserTriggerPrefabS;
     [SerializeField] private Sprite laserRightSprite;
     [SerializeField] private Sprite laserSouthSprite;
+    [SerializeField] private Sprite laserOffRightSprite;
+    [SerializeField] private Sprite laserOffSouthSprite;
     [SerializeField] private Sprite wallCrackedSprite;
     [SerializeField] private GameObject dynamic;
     [SerializeField] private Vector3 unityRowPosition = new Vector3(0f, 0f, 0f); //Initial row's Unity position
@@ -397,6 +399,19 @@ public class MazeCreator : MonoBehaviour
         locationToSpawnVentAt = new Vector3(locationToSpawnVentAt.x - 2.6f, locationToSpawnVentAt.y + 0.8f, locationToSpawnVentAt.z);
         
         GameObject mazeWirebox = Instantiate(wireboxPrefab, locationToSpawnWireboxAt, Quaternion.identity);
+        Vector3 spawnedAt = mazeWirebox.transform.localScale;
+        spawnedAt.x *= -1; //On left
+        
+        // Has right wall, no laser - on right
+        if (ellersMaze[row, col].HasRightWall() && !ellersMaze[row, col].HasRightLaser())
+        {
+            spawnedAt.x *= -1;
+        }
+
+
+
+        mazeWirebox.transform.localScale = spawnedAt;
+
         GameObject mazeVent = Instantiate(ventPrefab, locationToSpawnVentAt, Quaternion.identity);
 
         mazeWirebox.transform.GetChild(0).GetComponent<InteractableWires>().SetObjectToChange(this.gameObject);
@@ -406,15 +421,28 @@ public class MazeCreator : MonoBehaviour
 
     public void ApplyWireEffect()
     {
+        FindObjectOfType<AudioManagerScript>().Play("ButtonPress");
         foreach (GameObject laser in lasers)
         {
-            laser.SetActive(false);
+            
+            if (laser.name == "S")
+            {
+                laser.transform.GetChild(0).gameObject.SetActive(false);
+                laser.GetComponent<SpriteRenderer>().sprite = laserOffSouthSprite;
+            }
+            if (laser.name == "E")
+            {
+                laser.transform.GetChild(0).gameObject.SetActive(false);
+                laser.GetComponent<SpriteRenderer>().sprite = laserOffRightSprite;
+            }
         }
     }
 
     public void ResetRat()
     {
         rat.transform.position = ratSpawnPosition;
+
+        FindObjectOfType<AudioManagerScript>().Play("Laser");
     }
 
     private void PrintEllersMaze()

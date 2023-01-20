@@ -12,7 +12,6 @@ public class FollowCamera : MonoBehaviour
         if(SceneManager.GetActiveScene().name != "Maze")
         {
             _camera.GetComponent<CinemachineBrain>().enabled = false;
-            Debug.Log("test");
         }
     }
 }

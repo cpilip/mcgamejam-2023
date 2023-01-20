@@ -12,7 +12,7 @@ public class Laser : MonoBehaviour
         if (otherObj.gameObject.tag == "Player") {
             Debug.Log("ded");
             // dies
-            MazeCreator.Instance.ResetRat();
+            CurrentSceneManager.Instance.ResetRat();
         }
     }
 
@@ -20,6 +20,7 @@ public class Laser : MonoBehaviour
     {
         this.GetComponent<BoxCollider2D>().enabled = false;
         this.GetComponent<SpriteRenderer>().sprite = laserOffSprite;
+        FindObjectOfType<AudioManagerScript>().Play("ButtonPress");
     }
 
     public void ApplyWireEffect() 
@@ -27,6 +28,7 @@ public class Laser : MonoBehaviour
         this.GetComponent<SpriteRenderer>().sprite = laserOffSprite;
 
         this.GetComponent<BoxCollider2D>().enabled = false;
+        FindObjectOfType<AudioManagerScript>().Play("ButtonPress");
     }
 
     public void applyButtonPower() {

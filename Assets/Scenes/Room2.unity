@@ -889,6 +889,10 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 751487417}
+    - target: {fileID: 2858693259960624431, guid: cf1e9175f334459418a9c7855f69b4ab, type: 3}
+      propertyPath: m_SortingOrder
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 2858693260444973201, guid: cf1e9175f334459418a9c7855f69b4ab, type: 3}
       propertyPath: m_Name
       value: PopUpKey (1)
@@ -1719,6 +1723,7 @@ GameObject:
   - component: {fileID: 751487418}
   - component: {fileID: 751487417}
   - component: {fileID: 751487416}
+  - component: {fileID: 751487419}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1792,6 +1797,50 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &751487419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 751487415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbe347f49d2f8a04d913547329b97143, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  material: {fileID: 2100000, guid: 1daa5a834babeca49aad070cc502314b, type: 2}
+  whiteNoiseFrequency: 0
+  whiteNoiseLength: 0.1
+  screenJumpFrequency: 0
+  screenJumpLength: 0.2
+  screenJumpMinLevel: 0.1
+  screenJumpMaxLevel: 0.9
+  flickeringStrength: 0.0001
+  flickeringCycle: 1000
+  isSlippage: 1
+  isSlippageNoise: 1
+  slippageStrength: 0.0001
+  slippageInterval: 1
+  slippageScrollSpeed: 1
+  slippageSize: 9
+  chromaticAberrationStrength: 0.001
+  isChromaticAberration: 1
+  isMultipleGhost: 1
+  multipleGhostStrength: 0.0001
+  isScanline: 1
+  isMonochrome: 0
+  isLetterBox: 0
+  isLetterBoxEdgeBlur: 0
+  letterBoxType: 1
+  isFilmDirt: 0
+  filmDirtTex: {fileID: 2800000, guid: 346702830402fbd4eb322ed47474e078, type: 3}
+  isDecalTex: 0
+  decalTex: {fileID: 2800000, guid: 346702830402fbd4eb322ed47474e078, type: 3}
+  decalTexPos: {x: 0, y: 0}
+  decalTexScale: {x: 1, y: 1}
+  isLowResolution: 0
+  resolutions: {x: 0, y: 0}
 --- !u!1 &799461074
 GameObject:
   m_ObjectHideFlags: 0

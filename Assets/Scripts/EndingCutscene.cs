@@ -13,16 +13,15 @@ public class EndingCutscene : MonoBehaviour
 
     private void Start()
     {
-        //parentOfAnimation.transform.GetChild(1).gameObject.SetActive(true);
         StartCoroutine(WaitABit());
     }
     IEnumerator WaitABit()
     {
         yield return new WaitForSeconds(5.0f); 
-        StartCoroutine(FadeOutOrIn());
+        StartCoroutine(FadeAnEyeIn());
     }
 
-    IEnumerator FadeOutOrIn(bool fadeToBlack = true, float fadeSpeed = .75f)
+    IEnumerator FadeAnEyeIn(bool fadeToBlack = true, float fadeSpeed = .75f)
     {
         //yield return new WaitForSeconds(3.0f);
         Color objectColor = current.GetComponent<Image>().color;
@@ -47,7 +46,7 @@ public class EndingCutscene : MonoBehaviour
             {
                 current = parentOfAnimation.transform.GetChild(currentIndex).gameObject;
                 currentIndex++;
-                StartCoroutine(FadeOutOrIn());
+                StartCoroutine(FadeAnEyeIn());
             }
                 
         }

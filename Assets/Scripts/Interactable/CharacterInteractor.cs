@@ -18,6 +18,8 @@ public class CharacterInteractor : MonoBehaviour
         {
             m_current.SendMessage("InteractWith");
             RatAnimator.Instance.TryInteract();
+            StartCoroutine(LetAnimationPlay());
+
         }
     }
     
@@ -42,5 +44,12 @@ public class CharacterInteractor : MonoBehaviour
                 m_current = null;
             }
         }
+    }
+
+    IEnumerator LetAnimationPlay()
+    {
+        this.gameObject.GetComponent<RatMovement>().isLocked = true;
+        yield return new WaitForSeconds(1.75f);
+        this.gameObject.GetComponent<RatMovement>().isLocked = false;
     }
 }
