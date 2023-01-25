@@ -39,7 +39,7 @@ public class ButtonScript : MonoBehaviour
             //objectToChange = shadow;
             if (SceneManager.GetActiveScene().name == "Room4")
             {
-                otherObj.transform.GetChild(0).gameObject.SendMessage("applyButtonPower");;
+                otherObj.transform.GetChild(0).gameObject.SendMessage("applyButtonPower");
             }
             
             if (objectToChange) 

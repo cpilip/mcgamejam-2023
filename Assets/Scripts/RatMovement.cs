@@ -18,6 +18,7 @@ public class RatMovement : MonoBehaviour
     private float dashCoolCounter;
 
     private Transform spritePrefabObject;
+    private Transform lightPrefabObject;
     private bool facingRight = true;
     public bool isDashing;
     public bool isLocked = false;
@@ -27,6 +28,7 @@ public class RatMovement : MonoBehaviour
         // Turns out an animator component overrides any transform changes via script
         // This script is on the Rat prefab > get the RatSprite, not the SideRat
         spritePrefabObject = this.transform.Find("RatSprite");
+        lightPrefabObject = this.transform.GetChild(0);
         Debug.Log(spritePrefabObject.gameObject.name);
     }
 
@@ -70,23 +72,40 @@ public class RatMovement : MonoBehaviour
             if (rb.velocity.x > 0 && !facingRight)
             {
                 facingRight = !facingRight;
+                // Sprite
                 Vector3 rPosition = spritePrefabObject.localPosition;
                 Vector3 rScale = spritePrefabObject.localScale;
                 rPosition.x *= -1;
                 rScale.x *= -1;
                 spritePrefabObject.localPosition = rPosition;
                 spritePrefabObject.localScale = rScale;
+                // Light
+                rPosition = lightPrefabObject.localPosition;
+                rScale = lightPrefabObject.localScale;
+                rPosition.x *= -1;
+                rScale.x *= -1;                
+                lightPrefabObject.localPosition = rPosition;
+                lightPrefabObject.localScale = rScale;
+                
             }
             // Moving left
             else if (rb.velocity.x < 0 && facingRight)
             {
                 facingRight = !facingRight;
+                // Sprite
                 Vector3 rPosition = spritePrefabObject.localPosition;
                 Vector3 rScale = spritePrefabObject.localScale;
                 rPosition.x *= -1;
                 rScale.x *= -1;
                 spritePrefabObject.localPosition = rPosition;
                 spritePrefabObject.localScale = rScale;
+                // Light
+                rPosition = lightPrefabObject.localPosition;
+                rScale = lightPrefabObject.localScale;
+                rPosition.x *= -1;
+                rScale.x *= -1;                
+                lightPrefabObject.localPosition = rPosition;
+                lightPrefabObject.localScale = rScale;
             }
 
             if (Input.GetKeyDown(KeyCode.Space))

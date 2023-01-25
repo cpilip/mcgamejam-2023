@@ -20,6 +20,7 @@ public class Laser : MonoBehaviour
     {
         this.GetComponent<BoxCollider2D>().enabled = false;
         this.GetComponent<SpriteRenderer>().sprite = laserOffSprite;
+        this.transform.GetChild(0).gameObject.SetActive(false);
         FindObjectOfType<AudioManagerScript>().Play("ButtonPress");
     }
 

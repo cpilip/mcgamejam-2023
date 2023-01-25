@@ -11,6 +11,8 @@ TagManager:
   - AudioManager
   - UI_Cheese
   - UI_CCTV
+  - Vent
+  - Lights
   layers:
   - Default
   - TransparentFX

@@ -13,6 +13,7 @@ public class LaserDoor : MonoBehaviour
         this.GetComponent<SpriteRenderer>().sprite = laserDoorOffSprite;
 
         this.GetComponent<BoxCollider2D>().enabled = false;
+        this.transform.GetChild(0).gameObject.SetActive(false);
         FindObjectOfType<AudioManagerScript>().Play("ButtonPress");
     }
 
