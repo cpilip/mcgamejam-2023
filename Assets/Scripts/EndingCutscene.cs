@@ -8,11 +8,15 @@ public class EndingCutscene : MonoBehaviour
     [SerializeField] private GameObject parentOfAnimation;
     [SerializeField] private GameObject current;
     [SerializeField] private GameObject finale;
-    [SerializeField] private GameObject creditsTime;
+    [SerializeField] private GameObject credits;
+    [SerializeField] private GameObject fin;
+    [SerializeField] private Animator anim;
     private int currentIndex = 1;
 
     private void Start()
     {
+        GameObject.FindGameObjectWithTag("Player").transform.GetChild(0).gameObject.SetActive(false);
+        //FindObjectOfType<AudioManagerScript>().Stop("Alarm");
         StartCoroutine(WaitABit());
     }
     IEnumerator WaitABit()
@@ -54,12 +58,18 @@ public class EndingCutscene : MonoBehaviour
 
     IEnumerator WaitForCredits()
     {
-        yield return new WaitForSeconds(7.0f);
+        yield return new WaitForSeconds(4.0f);
         finale.SetActive(true);
-        yield return new WaitForSeconds(5.0f);
-        creditsTime.SetActive(true);
-
+        yield return new WaitForSeconds(2.0f);
+        credits.SetActive(true);
+        anim.enabled = true;
+        yield return new WaitForSeconds(40.0f);
+        fin.SetActive(true);
         //Continue credits here
     }
     
+    public void EndGame()
+    {
+        Application.Quit();
+    }
 }

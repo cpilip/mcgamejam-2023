@@ -885,6 +885,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2858693259458856952, guid: cf1e9175f334459418a9c7855f69b4ab, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -1.5999761
+      objectReference: {fileID: 0}
+    - target: {fileID: 2858693259458856952, guid: cf1e9175f334459418a9c7855f69b4ab, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -2.799988
+      objectReference: {fileID: 0}
+    - target: {fileID: 2858693259458856952, guid: cf1e9175f334459418a9c7855f69b4ab, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 19.399994
+      objectReference: {fileID: 0}
     - target: {fileID: 2858693259960624431, guid: cf1e9175f334459418a9c7855f69b4ab, type: 3}
       propertyPath: m_Camera
       value: 

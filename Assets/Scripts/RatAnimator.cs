@@ -47,6 +47,16 @@ public class RatAnimator : MonoBehaviour
     {
         anim.SetTrigger("Nibble");
     }
+    public void TryLookAround()
+    {
+        anim.SetTrigger("LookAround");
+    }
+
+    public void TryTransform()
+    {
+        anim.SetTrigger("Transform");
+    }
+
 
     public IEnumerator TryWakeup()
     {

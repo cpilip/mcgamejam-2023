@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Cinemachine;
 
 public class CurrentSceneManager : MonoBehaviour
 {
@@ -91,6 +92,8 @@ public class CurrentSceneManager : MonoBehaviour
         if (scene.name == "Room4")
         {
             player.transform.GetChild(0).gameObject.SetActive(true);
+            //player.transform.parent.transform.GetChild(0).gameObject.GetComponent<CinemachineVirtualCamera>().Follow = null;
+            //Camera.main.gameObject.transform.position = new Vector3(0.0f, 0.76f, -10.0f);
         }
 
         if (scene.name != "TitlePage")

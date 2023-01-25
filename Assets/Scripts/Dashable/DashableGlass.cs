@@ -42,7 +42,7 @@ public class DashableGlass : Dashable
                 case 3:
                     this.transform.parent.gameObject.GetComponent<BoxCollider2D>().enabled = false;
                     this.GetComponentInParent<BoxCollider2D>().enabled = false;
-                    this.GetComponentInParent<SpriteRenderer>().sprite = glassCrackedALot;
+                    this.GetComponentInParent<SpriteRenderer>().sprite = glassOpen;
                     this.gameObject.transform.GetChild(0).GetComponent<EndButton>().ActivateEndButton();
                     break;
             }

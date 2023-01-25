@@ -6,68 +6,66 @@ using UnityEngine.UI;
 
 public class EndButton : MonoBehaviour
 {
-    private bool isActive;
+    private bool isActive = false;
+    private bool isActive2 = false;
     [SerializeField] private GameObject blackOut;
     [SerializeField] private GameObject static1;
     [SerializeField] private GameObject static2;
+    [SerializeField] private Animator anim;
     [SerializeField] GameObject LoreObj;
 
-    // Not active
-    void onStart(){
-        isActive = false;
-    }
 
     void OnTriggerEnter2D(Collider2D otherObj) {
         Debug.Log("Game Over!");
 
-        if (otherObj.gameObject.tag == "Player" && this.isActive)
+        if (otherObj.gameObject.tag == "Player" && this.isActive2)
         {
             otherObj.gameObject.GetComponent<RatMovement>().isLocked = true;
+            
+            FindObjectOfType<AudioManagerScript>().Play("Alarm");
+            CameraChanger.Instance.SwapToCutsceneCamera();
+
             StartCoroutine(FadeInStatic());
 
-            // just interact with 
-            LoreObj.SendMessage("InteractWith");
-            SceneManager.LoadScene("EndSceneCredits");
         }
 
     }
 
     IEnumerator FadeInStatic(bool fadeToBlack = true, int fadeSpeed = 5)
     {
-        blackOut.SetActive(true);
-        yield return new WaitForSeconds(12f);
-        blackOut.SetActive(false);
-        yield return new WaitForSeconds(8f);
+        RatAnimator.Instance.TryLookAround();
+        
+        yield return new WaitForSeconds(6f);
 
-        Color objectColor = static1.GetComponent<Image>().color;
-        float fadeAmount;
+        anim.enabled = true;
+        yield return new WaitForSeconds(4f);
 
-        while (static1.GetComponent<Image>().color.a < 1)
-        {
-            fadeAmount = objectColor.a + (fadeSpeed * Time.deltaTime);
+        //FindObjectOfType<AudioManagerScript>().Stop("Alarm");
 
-            objectColor = new Color(objectColor.r, objectColor.g, objectColor.b, fadeAmount);
-            static1.GetComponent<Image>().color = objectColor;
-            static2.GetComponent<Image>().color = objectColor;
-
-            if (static1.gameObject.activeSelf)
-            {
-                static1.gameObject.SetActive(false);
-                static2.gameObject.SetActive(true);
-            } else if (static2.gameObject.activeSelf)
-            {
-                static2.gameObject.SetActive(false);
-                static1.gameObject.SetActive(true);
-            }
-
-            yield return null;
-        }
-
+        //yield return new WaitForSeconds(2.5f);
+        // just interact with 
+        LoreObj.SendMessage("InteractWith");
         SceneManager.LoadScene("EndSceneCredits");
     }
 
     public void ActivateEndButton()
     {
         isActive = true; 
+    }
+
+    void Update()
+    {
+        if (isActive)
+        {
+            isActive = false;
+            isActive2 = true;
+            StartCoroutine(WaitASec());
+        }
+    }
+
+    IEnumerator WaitASec()
+    {
+        yield return new WaitForSeconds(1f);
+        this.gameObject.GetComponent<BoxCollider2D>().enabled = true;
     }
 }
